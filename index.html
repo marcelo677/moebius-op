@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="La gorra nos cubre de versos breves y acompaña al arte y a la naturaleza. Roma Norte, CDMX.">
+<meta property="og:title" content="moebius OP">
+<meta property="og:description" content="La gorra nos cubre de versos breves y acompaña al arte y a la naturaleza.">
+<meta property="og:image" content="img/f_espalda.jpg">
+<link rel="icon" href="img/mark_bone.png">
+<title>moebius OP · 03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: one black mobile scroll read like a spec sheet: bracketed indexes, hairlines, Courier only. Typewriter moments hidden in the details. */
+:root{
+  --bg:#0A0A09; --panel:#121211; --line:#262522; --dim:#6E695F; --mid:#A7A093; --bone:#ECE6DA;
+  --mono:'Courier Prime','Courier New',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--bone);font-family:var(--mono);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));max-width:720px;margin:0 auto}
+.lbl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.lbl b{color:var(--mid);font-weight:400}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 24px;background:var(--bg);color:var(--bone);border:1px solid var(--bone);border-radius:0;font-family:var(--mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .18s,color .18s}
+.btn:hover{background:var(--bone);color:var(--bg)}
+:focus-visible{outline:1px solid var(--bone);outline-offset:3px}
+.caret{display:inline-block;width:.55em;height:1.05em;margin-left:2px;vertical-align:-.16em;background:currentColor;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+section{border-top:1px solid var(--line)}
+.sec{padding-block:72px 80px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:36px}
+
+/* top bar */
+.bar{position:absolute;left:0;right:0;top:0;z-index:3}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:18px}
+.bar .wrap.term{display:block;padding-block:0 6px}
+.logo{background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:10px;color:var(--bone);font-family:var(--mono);font-size:12px;letter-spacing:.16em;min-height:44px}
+.mkwrap{display:block;line-height:0}
+.mkwrap svg{display:block;width:100%;height:auto;overflow:visible}
+.hm{width:34px}
+.fm{width:120px}
+.flogo{display:flex;flex-direction:column;align-items:center;gap:14px}
+.fword{font-size:22px;font-weight:700;letter-spacing:.02em;min-height:1.3em}
+.mk .st path{fill:none;stroke:var(--bone);stroke-dasharray:1 1;stroke-dashoffset:1}
+.hm .st path{stroke-width:30}
+.fm .st path{stroke-width:9}
+.mk .fl{fill:var(--bone);opacity:0}
+.mk.play .st path{animation:mkdraw 1.1s cubic-bezier(.65,0,.35,1) forwards;animation-delay:calc(var(--i) * 32ms)}
+.mk.play .fl{animation:mkfill .7s ease forwards 1.45s}
+.mk.play .st{animation:mkout .5s ease forwards 1.9s}
+@keyframes mkdraw{to{stroke-dashoffset:0}}
+@keyframes mkfill{to{opacity:1}}
+@keyframes mkout{to{opacity:0}}
+.coords{font-size:10.5px;letter-spacing:.14em;color:var(--mid);text-align:right;line-height:1.4}
+.term{min-height:18px;font-size:12px;color:var(--mid);letter-spacing:.06em}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:var(--bg)}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 8%;filter:grayscale(.15) contrast(1.05)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,9,.6) 0%,rgba(10,10,9,0) 16%,rgba(10,10,9,0) 46%,rgba(10,10,9,.82) 66%,#0A0A09 84%)}
+.hero-in{position:relative;z-index:2;padding-block:0 34px;display:flex;flex-direction:column;gap:18px;width:100%}
+.hero h1{margin:0;font-size:clamp(26px,7.2vw,48px);line-height:1.12;font-weight:400;letter-spacing:-.01em;text-wrap:balance}
+.hero p{margin:0;color:var(--mid);font-size:13px;max-width:40ch;text-wrap:balance}
+.ticks{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;font-size:10.5px;letter-spacing:.16em;color:var(--dim)}
+
+/* poem */
+.pause{padding-block:42svh}
+.poem{margin:0;font-size:clamp(24px,6.6vw,40px);line-height:1.34;white-space:pre-line}
+.sig{margin-top:34px;font-size:11px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
+.sig::before{content:"— "}
+
+/* floating collection photo */
+.float{padding-block:120px 140px;display:flex;flex-direction:column;align-items:center;gap:18px;border-top:0}
+.float img{display:block;width:min(78%,520px);height:auto;box-shadow:0 40px 80px rgba(0,0,0,.7),0 0 0 1px var(--line);animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-14px) rotate(.6deg)}}
+.float-cap{width:min(78%,520px);display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+
+/* full-bleed photos */
+.full{position:relative;padding:0;border-top:1px solid var(--line)}
+.full img{display:block;width:100%;height:auto;max-height:110svh;object-fit:cover}
+.full-cap{display:flex;justify-content:space-between;gap:12px;padding-block:12px 0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);position:absolute;left:0;right:0;bottom:12px;color:#ECE6DA;text-shadow:0 0 10px rgba(0,0,0,.7)}
+.full.tall img{height:100svh;max-height:none;object-position:50% 40%}
+.full.tall::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,9,0) 45%,rgba(10,10,9,.85) 82%,#0A0A09 100%);pointer-events:none}
+.full-over{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-block:0 34px;display:flex;flex-direction:column;gap:14px}
+.full-line{margin:0;font-size:clamp(28px,8vw,52px);line-height:1.08}
+
+/* caps */
+.caps{display:grid;grid-template-columns:minmax(0,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cap{position:relative;background:var(--bg);display:flex;flex-direction:column;min-width:0}
+.cap .stage{position:relative;aspect-ratio:4/5;max-width:100%;overflow:hidden;cursor:pointer;border:0;padding:0;background:var(--panel);display:block;width:100%}
+.cap .stage svg{position:absolute;inset:0;width:100%;height:100%;transition:opacity .35s,transform .5s}
+.cap .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .35s,transform .6s}
+.cap.reveal .stage img{opacity:1;transform:none}
+.cap.reveal .stage svg{opacity:0;transform:scale(.96)}
+@media (hover:hover) and (pointer:fine){.cap .stage:hover img{opacity:1;transform:none}.cap .stage:hover svg{opacity:0;transform:scale(.96)}}
+.cap .idx{position:absolute;left:12px;top:11px;z-index:2;font-size:12px;letter-spacing:.16em;color:var(--mid);pointer-events:none}
+.cap .hint{position:absolute;left:10px;bottom:auto;z-index:2;font-size:9.5px;letter-spacing:.14em;color:var(--dim);pointer-events:none}
+.cap .full{position:absolute;right:4px;top:2px;z-index:3;width:42px;height:42px;background:transparent;border:0;color:var(--mid);font-family:var(--mono);font-size:16px;cursor:pointer}
+.cap .meta{padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);flex:1}
+.cap .nm{font-size:17px;font-weight:700;letter-spacing:.04em}
+.cap .vs{font-size:15px;color:var(--mid);min-height:2.8em;line-height:1.4}
+.cap .sp{font-size:11.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.cap .ask{margin-top:auto;padding-top:6px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--bone);min-height:44px;display:flex;align-items:center;justify-content:space-between;border-top:1px dashed var(--line)}
+.cap .ask:hover{color:#fff}
+.cap.wide{grid-column:1 / -1}
+.cap.wide .stage{aspect-ratio:16/11}
+.legend{margin-top:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:10.5px;letter-spacing:.14em;color:var(--dim)}
+
+/* session strip */
+.strip{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));scroll-padding-left:max(18px,env(safe-area-inset-left,0px))}
+.strip::-webkit-scrollbar{display:none}
+.shot{flex:0 0 72%;max-width:420px;scroll-snap-align:start;border:0;padding:0;margin:0;background:var(--panel);color:inherit;font:inherit;text-align:left;cursor:zoom-in;position:relative}
+.shot img,.shot video{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--panel)}
+.shot .t{position:absolute;left:8px;top:7px;font-size:10px;letter-spacing:.16em;color:var(--bone);text-shadow:0 0 6px rgba(0,0,0,.6)}
+.shot .c{display:block;padding:9px 2px 0;font-size:11px;letter-spacing:.06em;color:var(--dim);background:var(--bg)}
+@media (min-width:760px){.shot{flex-basis:32%}.strip{padding-left:calc((100vw - 684px)/2);scroll-padding-left:calc((100vw - 684px)/2)}}
+
+/* typed poem */
+.typed{margin:0;min-height:5.4em;font-size:clamp(24px,6.6vw,40px);line-height:1.34;white-space:pre-line}
+
+/* clip */
+.clip{margin:0 0 18px;border:1px solid var(--line);background:var(--panel)}
+.clip video{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;max-width:100%}
+.clip figcaption{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border-top:1px solid var(--line)}
+
+/* map */
+.mapbox{border:1px solid var(--line);background:#0E0E0D;overflow:hidden}
+.mapbox svg{display:block;width:100%;height:auto}
+.pin{cursor:pointer}
+.pin .dot{fill:var(--bone);transition:r .2s}
+.pin text{font-family:var(--mono);font-size:11px;fill:var(--bg);font-weight:700}
+.pin:hover .dot,.pin:focus .dot{r:15}
+.pin .halo{fill:none;stroke:var(--bone);stroke-width:1;animation:halo 2.4s ease-out infinite}
+@keyframes halo{from{r:12;opacity:.8}to{r:34;opacity:0}}
+.places{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--line)}
+.places li{border-bottom:1px solid var(--line)}
+.places a{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 0;text-decoration:none;min-height:54px}
+.places .n{font-size:11px;color:var(--mid)}
+.places b{display:block;font-size:14px;font-weight:400}
+.places .d{font-size:11.5px;color:var(--dim)}
+.places .go{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
+.note{margin-top:12px;font-size:10.5px;color:var(--dim);letter-spacing:.06em}
+
+/* footer */
+.foot{padding-block:72px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px}
+.foot>*{width:100%;display:flex;flex-direction:column;align-items:center}
+
+.foot img{width:120px;height:auto}
+.contact{display:grid;justify-items:center;gap:4px;font-size:13px;color:var(--mid)}
+.contact a{text-decoration:none;border-bottom:1px solid var(--line);width:fit-content}
+.secret{background:none;border:0;padding:0;color:var(--dim);font-family:var(--mono);font-size:13px;cursor:pointer;text-align:center;min-height:44px}
+.secret-out{min-height:3em;font-size:16px;line-height:1.45;white-space:pre-line}
+.legal{display:flex;justify-content:center;column-gap:24px;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px;font-size:10.5px;letter-spacing:.16em;color:var(--dim)}
+
+/* ant */
+.antlane{position:relative;display:block!important;height:26px;margin-top:-6px;border-bottom:1px solid var(--line);overflow:hidden}
+.ant{position:absolute;left:0;bottom:-1px;width:30px;height:15px;padding:0;margin:0;border:0;background:none;color:var(--mid);cursor:pointer;will-change:transform}
+.ant svg{display:block}
+.ant .lg{transform-box:fill-box;transform-origin:50% 0}
+.ant.walk .la{animation:antstep .26s ease-in-out infinite alternate}
+.ant.walk .lb{animation:antstep .26s ease-in-out infinite alternate-reverse}
+.ant.walk .ant-bd{animation:antbob .26s ease-in-out infinite alternate}
+.ant .ant-an{transform-box:fill-box;transform-origin:0 100%;animation:antsniff 1.6s ease-in-out infinite}
+@keyframes antstep{from{transform:rotate(-24deg)}to{transform:rotate(24deg)}}
+@keyframes antbob{to{transform:translateY(-.4px)}}
+@keyframes antsniff{50%{transform:rotate(-10deg)}}
+
+/* floating */
+.fab{position:fixed;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;height:48px;padding:0 16px;background:var(--bg);border:1px solid var(--bone);display:flex;align-items:center;gap:8px;color:var(--bone);text-decoration:none;font-size:11px;letter-spacing:.18em;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .3s}
+.fab.show{opacity:1;transform:none;pointer-events:auto}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:45;background:var(--bone);color:var(--bg);padding:10px 14px;font-size:12px;letter-spacing:.06em;width:min(420px,calc(100% - 36px))}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:60;background:#050505;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.lb-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-size:11px;letter-spacing:.18em;color:var(--dim)}
+.lb button.ic{width:46px;height:46px;background:transparent;color:var(--bone);border:1px solid var(--line);font-family:var(--mono);font-size:18px;cursor:pointer}
+.lb-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 10px;touch-action:pan-y}
+.lb-stage img,.lb-stage video{max-width:100%;max-height:100%;object-fit:contain;user-select:none}
+.lb-cap{text-align:center;padding:10px 16px 0;font-size:13px;color:var(--mid);min-height:2.4em}
+.lb-nav{display:flex;justify-content:center;gap:8px;padding:12px 16px 18px}
+
+@media (min-width:760px){.caps{grid-template-columns:repeat(2,minmax(0,1fr))}.cap.wide{grid-column:auto}.cap.wide .stage{aspect-ratio:4/5}}
+@media (prefers-reduced-motion:reduce){.mk .fl{opacity:1!important}.mk .st{display:none}*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+
+<header class="hero" id="inicio">
+  <img class="bg" src="img/f_espalda.jpg" alt="Mujer de espaldas con gorra roja lavada: el símbolo moebius bordado atrás y la palabra moebius al costado">
+  <div class="bar">
+    <div class="wrap">
+      <button class="logo" id="logo" type="button" aria-label="moebius OP"><span class="mkwrap hm" id="hmark"></span>MOEBIUS OP</button>
+      <div class="coords">19.4194° N<br>99.1617° W</div>
+    </div>
+    <div class="wrap term" id="term" aria-live="polite"></div>
+  </div>
+  <div class="wrap hero-in">
+    <div class="lbl"><b>[000]</b> Poesía bordada · Roma Norte</div>
+    <h1 id="heroLine">La gorra nos cubre de versos breves y acompaña al arte y a la naturaleza.</h1>
+    <div><a class="btn wa" data-msg="Hola Orlando, vi moebius OP y quiero una gorra." href="#" target="_blank" rel="noopener">Comprar →</a></div>
+    <div class="ticks" aria-hidden="true"><span>001</span><span>002</span><span>003</span><span>005</span><span>008</span><span>013</span></div>
+  </div>
+</header>
+
+<section class="pause">
+  <div class="wrap">
+    <p class="poem">Un café y sus ojos
+fueron el mismo amor.</p>
+  </div>
+</section>
+
+<section class="float">
+  <img src="img/f_pila.jpg" alt="Gorras moebius OP apiladas en una banca de la Roma Norte: roja con «Miré con los ojos cerrados», amarilla, café, mostaza y azul, con «moebius OP» bordado al costado">
+  <div class="float-cap"><span>[ ] La colección</span><span>5 colores</span></div>
+</section>
+
+
+<section id="gorras">
+  <div class="wrap sec">
+    <div class="sec-head"><span class="lbl"><b>[001]</b> Gorras</span><span class="lbl" id="capHint">Toca: el dibujo</span></div>
+    <div class="caps" id="caps"></div>
+    <div class="legend"><span>Bordado frontal 100 × 14 mm</span><span>Símbolo atrás 13 × 15 mm</span><span>Talla única · ajustable</span></div>
+  </div>
+</section>
+
+<section id="sesion">
+  <div class="wrap sec" style="padding-bottom:24px">
+    <div class="sec-head" style="margin-bottom:22px"><span class="lbl"><b>[002]</b> Sesión</span><span class="lbl">Roma Norte · 19.11.26 · 08:19–08:32</span></div>
+  </div>
+  <div class="strip" id="strip"></div>
+  <div class="wrap" style="padding-block:14px 72px"><div class="legend" style="margin:0"><span id="stripCount">01 / 09</span><span>Desliza →</span></div></div>
+</section>
+
+<section id="poema">
+  <div class="wrap sec">
+    <div class="sec-head"><span class="lbl"><b>[003]</b> Poema</span></div>
+    <p class="typed" id="typed" aria-label="El colibrí con su danza seduce a la flor, ella le entrega su néctar.">El colibrí con su danza
+seduce a la flor,
+ella le entrega su néctar.</p>
+  </div>
+</section>
+
+<section id="donde">
+  <div class="wrap sec">
+    <div class="sec-head"><span class="lbl"><b>[004]</b> Dónde</span><span class="lbl">CDMX 06700</span></div>
+    <figure class="clip"><video id="david" src="img/v_david.mp4" poster="img/v_david_poster.jpg" muted loop playsinline preload="metadata" aria-label="Acercamiento lento al rostro del David en la Plaza Río de Janeiro"></video><figcaption><span>[02] Plaza Río de Janeiro</span><span>19.4206° N · 99.1613° W</span></figcaption></figure>
+    <div class="mapbox">
+      <svg viewBox="0 0 400 480" role="img" aria-label="Mapa ilustrado de la Roma Norte con cuatro puntos">
+        <defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V5" stroke="#ECE6DA" stroke-width=".5" opacity=".25"/></pattern></defs>
+        <rect width="400" height="480" fill="#0E0E0D"/>
+        <g stroke="#1A1A18" stroke-width=".5"><path d="M0 40H400M0 80H400M0 120H400M0 160H400M0 200H400M0 240H400M0 280H400M0 320H400M0 360H400M0 400H400M0 440H400M40 0V480M80 0V480M120 0V480M160 0V480M200 0V480M240 0V480M280 0V480M320 0V480M360 0V480"/></g>
+        <g transform="rotate(-9 200 240)">
+          <g stroke="#2A2926" stroke-width="6" stroke-linecap="square">
+            <path d="M-60 70H460M-60 135H460M-60 195H460M-60 320H460M-60 385H460M-60 445H460"/>
+            <path d="M40 -40V540M110 -40V540M180 -40V540M250 -40V540M320 -40V540"/>
+          </g>
+          <rect x="-60" y="246" width="520" height="24" fill="#1F1E1B"/>
+          <rect x="-60" y="255" width="520" height="6" fill="url(#hatch)"/>
+          <rect x="188" y="143" width="54" height="45" fill="url(#hatch)" stroke="#6E695F" stroke-width=".6"/>
+          <rect x="188" y="328" width="54" height="50" fill="url(#hatch)" stroke="#6E695F" stroke-width=".6"/>
+          <g font-family="Courier Prime, monospace" font-size="8" fill="#6E695F" letter-spacing="1.2">
+            <text x="-20" y="67">PUEBLA</text><text x="-20" y="132">DURANGO</text><text x="-20" y="192">COLIMA</text><text x="262" y="192">TABASCO</text>
+            <text x="-20" y="242" fill="#A7A093">AV. ÁLVARO OBREGÓN</text>
+            <text x="-20" y="317">ZACATECAS</text><text x="-20" y="382">QUERÉTARO</text><text x="-20" y="442">SAN LUIS POTOSÍ</text>
+            <g transform="rotate(90)"><text x="20" y="-114">MEDELLÍN</text><text x="20" y="-184">ORIZABA</text><text x="20" y="-254">CÓRDOBA</text><text x="20" y="-324">MÉRIDA</text></g>
+          </g>
+          <path d="M-60 6H460" stroke="#6E695F" stroke-width="8"/>
+          <path d="M-14 -40V540" stroke="#6E695F" stroke-width="7"/>
+          <path d="M374 -40V540" stroke="#6E695F" stroke-width="7"/>
+        </g>
+        <g font-family="Courier Prime, monospace" font-size="8.5" fill="#A7A093" letter-spacing="1.4">
+          <text x="14" y="18">AV. CHAPULTEPEC</text>
+          <text transform="translate(26 300) rotate(-99)">AV. INSURGENTES</text>
+          <text transform="translate(384 170) rotate(81)">AV. CUAUHTÉMOC</text>
+        </g>
+        <g font-family="Courier Prime, monospace" font-size="8" fill="#6E695F"><text x="12" y="470">ESC ≈ 1:9000 · ILUSTRATIVO</text></g>
+        <g transform="translate(360 440)" font-family="Courier Prime, monospace" font-size="8" fill="#A7A093"><circle r="13" fill="none" stroke="#6E695F" stroke-width=".7"/><path d="M0 -9L3.5 3H-3.5Z" fill="#A7A093"/><text x="-2.5" y="-17">N</text></g>
+        <a class="pin wa" data-msg="Hola Orlando, quiero pasar al estudio de Tabasco 130. ¿A qué hora puedo ir?" href="#" target="_blank" rel="noopener" aria-label="1, Estudio, Tabasco 130"><circle class="halo" cx="280" cy="192" r="12"/><circle class="dot" cx="280" cy="192" r="12"/><text x="276.5" y="196">1</text></a>
+        <a class="pin wa" data-msg="Hola Orlando, ¿cuándo es el próximo drop en la Plaza Río de Janeiro?" href="#" target="_blank" rel="noopener" aria-label="2, Plaza Río de Janeiro"><circle class="dot" cx="197" cy="146" r="10"/><text x="193.5" y="150">2</text></a>
+        <a class="pin wa" data-msg="Hola Orlando, ¿cuándo hay pop-up en Álvaro Obregón?" href="#" target="_blank" rel="noopener" aria-label="3, Camellón de Álvaro Obregón"><circle class="dot" cx="130" cy="270" r="10"/><text x="126.5" y="274">3</text></a>
+        <a class="pin wa" data-msg="Hola Orlando, ¿cuándo es el próximo drop en la Plaza Luis Cabrera?" href="#" target="_blank" rel="noopener" aria-label="4, Plaza Luis Cabrera"><circle class="dot" cx="230" cy="326" r="10"/><text x="226.5" y="330">4</text></a>
+      </svg>
+    </div>
+    <ul class="places">
+      <li><a class="wa" data-msg="Hola Orlando, quiero pasar al estudio de Tabasco 130. ¿A qué hora puedo ir?" href="#" target="_blank" rel="noopener"><span class="n">01</span><span><b>Estudio</b><span class="d">Tabasco 130, Roma Norte</span></span><span class="go">Agendar →</span></a></li>
+      <li><a class="wa" data-msg="Hola Orlando, ¿cuándo es el próximo drop en la Plaza Río de Janeiro?" href="#" target="_blank" rel="noopener"><span class="n">02</span><span><b>Plaza Río de Janeiro</b><span class="d">Drop de poesía</span></span><span class="go">Avísame →</span></a></li>
+      <li><a class="wa" data-msg="Hola Orlando, ¿cuándo hay pop-up en Álvaro Obregón?" href="#" target="_blank" rel="noopener"><span class="n">03</span><span><b>Camellón Álvaro Obregón</b><span class="d">Pop-up de fin de semana</span></span><span class="go">Avísame →</span></a></li>
+      <li><a class="wa" data-msg="Hola Orlando, ¿cuándo es el próximo drop en la Plaza Luis Cabrera?" href="#" target="_blank" rel="noopener"><span class="n">04</span><span><b>Plaza Luis Cabrera</b><span class="d">Drop de poesía</span></span><span class="go">Avísame →</span></a></li>
+    </ul>
+    <div class="note"><a href="https://www.google.com/maps/search/?api=1&query=Tabasco+130,+Roma+Norte,+CDMX" target="_blank" rel="noopener">Abrir Tabasco 130 en Google Maps ↗</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot" style="border-top:1px solid var(--line)">
+    <div class="flogo" role="img" aria-label="moebius OP"><span class="mkwrap fm" id="fmark"></span><div class="fword" id="fword">moebius OP</div></div>
+    <div><a class="btn wa" data-msg="Hola Orlando, quiero una gorra de moebius OP." href="#" target="_blank" rel="noopener">Comprar →</a></div>
+    <div class="contact">
+      <span>Tel. <span style="user-select:all">+52 55 6888 8698</span></span>
+      <span>Tabasco 130, Roma Norte, CDMX</span>
+      <a href="https://www.instagram.com/moebiusopm" target="_blank" rel="noopener">@moebiusopm</a>
+    </div>
+    <div>
+      <button class="secret" id="secret" type="button" aria-label="Un verso escondido">&gt; <span class="caret"></span></button>
+      <div class="secret-out" id="secretOut" aria-live="polite"></div>
+    </div>
+    <div class="legal"><span>MOEBIUS OP · CDMX</span><span>UNA CARA · NINGÚN BORDE</span></div>
+    <div class="antlane" id="antlane" aria-hidden="true"><button class="ant" id="ant" type="button" tabindex="-1" aria-label="Guita">
+      <svg viewBox="0 0 32 16" width="30" height="15"><g fill="none" stroke="currentColor" stroke-width=".9" stroke-linecap="round">
+        <g class="lg la"><path d="M18 9 L15.5 14"/></g><g class="lg lb"><path d="M19.5 9 L19.5 14.5"/></g><g class="lg la"><path d="M21 9 L24 14"/></g>
+        <path class="ant-an" d="M27.5 5.5 Q29 2 31 1.6M27 5.2 Q27.6 1.8 29.2 .8"/>
+      </g><g class="ant-bd" fill="currentColor"><ellipse cx="10.5" cy="8" rx="5.2" ry="3.4"/><ellipse cx="19.5" cy="8.2" rx="3" ry="1.9"/><circle cx="26" cy="7" r="2.3"/><path d="M15.5 8.2h1.5M22.4 7.9h1.5" stroke="currentColor" stroke-width="1.2"/></g>
+      <g fill="none" stroke="currentColor" stroke-width=".9" stroke-linecap="round"><g class="lg lb"><path d="M18.5 9.4 L17 14.6"/></g><g class="lg la"><path d="M20 9.4 L21.5 14.8"/></g><g class="lg lb"><path d="M21.5 9.2 L25.5 13.6"/></g></g></svg>
+    </button></div>
+  </div>
+</footer>
+
+<a class="fab wa" id="fab" data-msg="Hola Orlando, vi moebius OP y quiero una gorra." href="#" target="_blank" rel="noopener" aria-label="Comprar">COMPRAR →</a>
+<div class="toast" id="toast" hidden></div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto a pantalla completa">
+  <div class="lb-top"><span id="lbCount">01 / 05</span><button class="ic" type="button" id="lbClose" aria-label="Cerrar">×</button></div>
+  <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""><video id="lbVid" muted loop playsinline hidden></video></div>
+  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-nav"><button class="ic" type="button" id="lbPrev" aria-label="Anterior">←</button><a class="btn wa" id="lbAsk" data-msg="Hola Orlando, quiero esta gorra." href="#" target="_blank" rel="noopener" style="min-height:46px">Comprar</a><button class="ic" type="button" id="lbNext" aria-label="Siguiente">→</button></div>
+</div>
+
+<script>
+(function(){
+  var PHONE='525568888698';
+  function wa(msg){return 'https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg)}
+  function bindWa(root){(root||document).querySelectorAll('.wa').forEach(function(a){a.href=wa(a.getAttribute('data-msg')||'Hola Orlando')})}
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  // typewriter helper
+  function typeInto(el,text,opts){
+    opts=opts||{}; if(el._tw)clearTimeout(el._tw);
+    if(reduce){el.textContent=text;return}
+    var i=0, node=document.createTextNode(''), caret=document.createElement('span'); caret.className='caret';
+    el.textContent=''; el.appendChild(node); el.appendChild(caret);
+    (function step(){
+      node.data=text.slice(0,i);
+      if(i<text.length){var c=text.charAt(i); i++; el._tw=setTimeout(step,c==='\n'?(opts.nl||420):(c===','||c==='.'?220:(opts.speed||45)+Math.random()*50))}
+      else if(opts.keepCaret===false){caret.remove()}
+    })();
+  }
+
+  // caps
+  var CAPS=[
+    {id:'MOSTAZA',name:'Un café',color:'#A8803F',thread:'#EFE9DC',sym:1,lines:['Un café y sus ojos','fueron el mismo amor.'],photo:'img/r_mostaza_cafe.jpg',ph:'Real · 08:22',sku:'OPM-GOR-CAFE-MO'},
+    {id:'GRAFITO',name:'Un café',color:'#454542',thread:'#EFE9DC',sym:1,lines:['Un café y sus ojos','fueron el mismo amor.'],photo:'img/r_grafito_cafe.jpg',ph:'Real · 08:19',sku:'OPM-GOR-CAFE-GR'},
+    {id:'NEGRO',name:'Un café',color:'#151514',thread:'#EFE9DC',lines:['Un café y sus ojos','fueron el mismo amor.'],photo:'img/r_negro_cafe.jpg',ph:'Real · 08:26',sku:'OPM-GOR-CAFE-NE'},
+    {id:'MOSTAZA',name:'Ojos cerrados',color:'#A8803F',thread:'#EFE9DC',lines:['Miré con los ojos cerrados','para encontrarte.'],photo:'img/r_mostaza_ojos.jpg',ph:'Real · 08:26',sku:'OPM-GOR-OJOS-MO'},
+    {id:'PIZARRA',name:'Tiempo herido',color:'#353A38',thread:'#EFE9DC',lines:['El tiempo está herido.','Bajo tu ausencia','un poema recorre.'],photo:'img/r_pizarra_tiempo.jpg',ph:'Real · 08:23',sku:'OPM-GOR-TIEM-PI'},
+    {id:'GRIS',name:'Te imagino',color:'#5A5A57',thread:'#EFE9DC',big:1,lines:['Te imagino,','escribo,','existes…'],photo:'img/r_gris_teimagino.jpg',ph:'Real · 08:27',sku:'OPM-GOR-IMAG-GR'}
+  ];
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function capSVG(c,k){
+    var mx=Math.max.apply(null,c.lines.map(function(l){return l.length})), fs=Math.min(c.big?19:13,200/(mx*0.6)), y0=(c.sym?150:124)-(c.lines.length-1)*(fs+4)/2;
+    var tx=c.lines.map(function(l,i){return '<text x="150" y="'+(y0+i*(fs+4)).toFixed(1)+'" text-anchor="middle" font-family="Courier Prime, Courier New, monospace" font-size="'+fs+'" font-weight="700" fill="'+c.thread+'">'+esc(l)+'</text>'}).join('');
+    var shape='M44 182C44 96 92 52 150 52C208 52 256 96 256 182Z', brim='M36 180Q150 166 264 180Q272 214 150 222Q28 214 36 180Z';
+    return '<svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid meet" aria-hidden="true">'+
+      '<defs><radialGradient id="g'+k+'" cx="38%" cy="30%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></radialGradient>'+
+      '<linearGradient id="b'+k+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".38"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient></defs>'+
+      '<g stroke="#ECE6DA" stroke-opacity=".1" stroke-width=".6"><path d="M150 48V64M150 296V312M24 190H40M260 190H276"/></g>'+
+      '<text x="282" y="352" text-anchor="end" font-family="Courier Prime, monospace" font-size="8" fill="#6E695F" letter-spacing="1">'+c.id+' '+c.color.toUpperCase()+'</text>'+
+      '<g transform="translate(0 40)">'+
+      '<path d="'+shape+'" fill="'+c.color+'"/><path d="'+shape+'" fill="url(#g'+k+')"/><path d="'+shape+'" fill="none" stroke="#ECE6DA" stroke-opacity=".16" stroke-width=".8"/>'+
+      '<path d="M150 54V180M150 54C118 70 100 120 98 180M150 54C182 70 200 120 202 180" fill="none" stroke="#000" stroke-opacity=".22" stroke-width=".8"/>'+
+      '<circle cx="150" cy="52" r="5" fill="'+c.color+'" stroke="#000" stroke-opacity=".3" stroke-width=".8"/>'+
+      '<circle cx="112" cy="84" r="2.2" fill="#000" fill-opacity=".35"/><circle cx="188" cy="84" r="2.2" fill="#000" fill-opacity=".35"/>'+
+      (c.sym?'<g fill="none" stroke="'+c.thread+'" stroke-width="1.1" opacity=".92"><ellipse cx="150" cy="104" rx="34" ry="30"/><ellipse cx="138" cy="104" rx="20" ry="28"/><ellipse cx="162" cy="104" rx="20" ry="28"/><circle cx="150" cy="106" r="7"/><circle cx="150" cy="106" r="2"/></g>':'')+
+      tx+
+      '<path d="'+brim+'" fill="'+c.color+'"/><path d="'+brim+'" fill="url(#b'+k+')"/><path d="'+brim+'" fill="none" stroke="#ECE6DA" stroke-opacity=".16" stroke-width=".8"/>'+
+      '<path d="M48 190Q150 178 252 190M56 200Q150 189 244 200" fill="none" stroke="#000" stroke-opacity=".28" stroke-width=".7" stroke-dasharray="2 2"/>'+
+      '<ellipse cx="150" cy="246" rx="96" ry="6" fill="#000" fill-opacity=".6"/>'+
+      '</g>'+
+      '<g font-family="Courier Prime, monospace" font-size="7.5" fill="#6E695F" letter-spacing=".8"><path d="M98 312H202M98 308V316M202 308V316" stroke="#3A3833" stroke-width=".6"/><text x="150" y="328" text-anchor="middle">100 MM</text></g>'+
+      '</svg>';
+  }
+  var grid=document.getElementById('caps');
+  CAPS.forEach(function(c,k){
+    var el=document.createElement('article'); el.className='cap'+(k===CAPS.length-1&&CAPS.length%2?' wide':'');
+    el.innerHTML='<button class="stage" type="button" aria-label="Ver la gorra '+esc(c.name)+' puesta">'+capSVG(c,k)+'<img src="'+c.photo+'" alt="Foto real de la gorra '+esc(c.name)+'" decoding="async"></button>'+
+      '<span class="idx">['+String(k+1).padStart(2,'0')+'] '+esc(c.ph.toUpperCase())+'</span>'+
+      '<button class="full" type="button" aria-label="Ver a pantalla completa">⤢</button>'+
+      '<div class="meta"><div class="nm">'+esc(c.name)+' · '+esc(c.id.charAt(0)+c.id.slice(1).toLowerCase())+'</div><div class="vs">«'+esc(c.lines.join(' '))+'»</div><div class="sp">'+c.sku+'</div>'+
+      '<a class="ask wa" data-msg="Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+'." href="#" target="_blank" rel="noopener"><span>Comprar</span><span>→</span></a></div>';
+    var vs=el.querySelector('.vs'), stage=el.querySelector('.stage'), verse='«'+c.lines.join(' ')+'»', typed=false;
+    function typeVerse(){if(!typed){typed=true; typeInto(vs,verse,{speed:30,keepCaret:false})}}
+    stage.addEventListener('mouseenter',typeVerse);
+    stage.addEventListener('click',function(){ if(canHover){openLb(k)} else {el.classList.toggle('reveal'); typeVerse()} });
+    el.querySelector('.full').addEventListener('click',function(){openLb(k)});
+    if(!canHover)el.classList.add('reveal');
+    grid.appendChild(el);
+  });
+  if(canHover){document.getElementById('capHint').textContent='Pasa el cursor: la foto real'}
+  bindWa();
+
+  // session strip
+  var SHOTS=[
+    {src:'img/v_teimagino_poster.jpg',video:'img/v_teimagino.mp4',t:'08:27 · VIDEO',c:'«Te imagino, escribo, existes…»',tag:'Sesión · video',msg:'Hola Orlando, quiero la gorra «Te imagino».'},
+    {src:'img/s3.jpg',t:'08:22',c:'Mostaza · bordado y símbolo',tag:'Sesión · detalle',msg:'Hola Orlando, quiero la gorra «Un café» en mostaza.'},
+    {src:'img/s4.jpg',t:'08:23',c:'Pizarra · «El tiempo está herido»',tag:'Sesión · detalle',msg:'Hola Orlando, quiero la gorra «Tiempo herido».'},
+    {src:'img/s2.jpg',t:'08:25',c:'La colección junto a la ventana',tag:'Sesión · lugar',msg:'Hola Orlando, quiero ver toda la colección de gorras.'},
+    {src:'img/v_ojos_poster.jpg',video:'img/v_ojos.mp4',t:'08:21 · VIDEO',c:'«Miré con los ojos cerrados…»',tag:'Sesión · video',msg:'Hola Orlando, quiero la gorra «Ojos cerrados».'},
+    {src:'img/s5.jpg',t:'08:20',c:'Mostaza · «Ojos cerrados»',tag:'Sesión · producto',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
+    {src:'img/s6.jpg',t:'08:32',c:'Grafito · el símbolo de cerca',tag:'Sesión · detalle',msg:'Hola Orlando, quiero la gorra «Un café» en grafito.'},
+    {src:'img/s7.jpg',t:'08:22',c:'Mostaza · de frente',tag:'Sesión · producto',msg:'Hola Orlando, quiero la gorra «Un café» en mostaza.'},
+    {src:'img/s8.jpg',t:'08:26',c:'Negro · sombra de la mañana',tag:'Sesión · producto',msg:'Hola Orlando, quiero la gorra «Un café» en negro.'}
+  ];
+  var strip=document.getElementById('strip'), sc=document.getElementById('stripCount');
+  var SHOT_ITEMS=SHOTS.map(function(x){return {src:x.src,video:x.video,alt:x.c,tag:x.tag,text:x.c,msg:x.msg}});
+  SHOTS.forEach(function(x,i){
+    var b=document.createElement('button'); b.type='button'; b.className='shot'; b.setAttribute('aria-label','Ver a pantalla completa: '+x.c);
+    b.innerHTML=(x.video?'<video src="'+x.video+'" poster="'+x.src+'" muted loop playsinline preload="none"></video>':'<img src="'+x.src+'" alt="'+esc(x.c)+'" decoding="async">')+'<span class="t">['+String(i+1).padStart(2,'0')+'] '+x.t+'</span><span class="c">'+esc(x.c)+'</span>';
+    b.addEventListener('click',function(){openList(SHOT_ITEMS,i)});
+    strip.appendChild(b);
+  });
+  sc.textContent='01 / '+String(SHOTS.length).padStart(2,'0');
+  strip.addEventListener('scroll',function(){var w=strip.children[0].getBoundingClientRect().width+8; sc.textContent=String(Math.min(SHOTS.length,Math.round(strip.scrollLeft/w)+1)).padStart(2,'0')+' / '+String(SHOTS.length).padStart(2,'0')},{passive:true});
+  if('IntersectionObserver' in window&&!reduce){var vio=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target; if(e.isIntersecting){v.preload='auto'; var p=v.play(); if(p&&p.catch)p.catch(function(){})} else v.pause()})},{threshold:.5}); strip.querySelectorAll('video').forEach(function(v){vio.observe(v)})}
+
+  // David clip plays only while on screen
+  (function(){var v=document.getElementById('david'); if(reduce||!('IntersectionObserver' in window))return;
+    new IntersectionObserver(function(e){if(e[0].isIntersecting){var p=v.play(); if(p&&p.catch)p.catch(function(){})} else v.pause()},{threshold:.4}).observe(v)})();
+
+  // floating button
+  var fab=document.getElementById('fab');
+  if('IntersectionObserver' in window){var heroV=true, footV=false; function fabSet(){fab.classList.toggle('show',!heroV&&!footV)}
+    new IntersectionObserver(function(e){heroV=e[0].isIntersecting; fabSet()},{threshold:.1}).observe(document.getElementById('inicio'));
+    new IntersectionObserver(function(e){footV=e[0].isIntersecting; fabSet()},{threshold:0}).observe(document.querySelector('footer .btn'));}
+
+  // lightbox
+  var lb=document.getElementById('lb'), img=document.getElementById('lbImg'), cap=document.getElementById('lbCap'), lc=document.getElementById('lbCount'), ask=document.getElementById('lbAsk'), idx=0, last=null;
+  var vid=document.getElementById('lbVid'), LIST=[];
+  function capItem(c){return {src:c.photo,alt:'Foto real de la gorra '+c.name,tag:c.ph,text:c.name+' · '+c.id.toLowerCase()+' · «'+c.lines.join(' ')+'»',msg:'Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+'.'}}
+  function show(i){idx=(i+LIST.length)%LIST.length; var it=LIST[idx];
+    if(it.video){img.hidden=true; vid.hidden=false; vid.poster=it.src; vid.src=it.video; var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){})} else {vid.pause(); vid.removeAttribute('src'); vid.hidden=true; img.hidden=false; img.src=it.src; img.alt=it.alt}
+    lc.textContent=String(idx+1).padStart(2,'0')+' / '+String(LIST.length).padStart(2,'0')+' · '+it.tag.toUpperCase(); ask.href=wa(it.msg); typeInto(cap,it.text,{speed:22,keepCaret:false})}
+  function openList(list,i){LIST=list; last=document.activeElement; show(i); lb.hidden=false; document.body.style.overflow='hidden'; document.getElementById('lbClose').focus(); if(lb.requestFullscreen)lb.requestFullscreen().catch(function(){})}
+  function openLb(i){openList(CAPS.map(capItem),i)}
+  function closeLb(){vid.pause(); lb.hidden=true; document.body.style.overflow=''; if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){}); if(last)last.focus()}
+  document.getElementById('lbClose').onclick=closeLb;
+  document.getElementById('lbPrev').onclick=function(){show(idx-1)};
+  document.getElementById('lbNext').onclick=function(){show(idx+1)};
+  document.addEventListener('fullscreenchange',function(){if(!document.fullscreenElement&&!lb.hidden){closeLb()}});
+  var sx=null, st=document.getElementById('lbStage');
+  st.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  st.addEventListener('touchend',function(e){if(sx===null)return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40)show(idx+(dx<0?1:-1)); sx=null});
+
+  // typed poem on scroll
+  var t=document.getElementById('typed'), full=t.textContent;
+  if(!reduce&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect(); typeInto(t,full,{nl:520})}},{threshold:.6}); io.observe(t)}
+
+  // EASTER EGG 1: tap the logo, a formula and a verse type in the top line
+  var PAIRS=['> f(x) = f(−x)   miré con los ojos cerrados','> A ∩ B ≠ ∅   un café y sus ojos','> lím t→∞   el tiempo está herido','> Σ besoₙ   el lunar lleva la cuenta','> χ = 0   una cara, ningún borde','> Fₙ = Fₙ₋₁ + Fₙ₋₂   mañana es la suma de ayer'];
+  var pi=0, term=document.getElementById('term');
+  document.getElementById('logo').addEventListener('click',function(){typeInto(term,PAIRS[pi%PAIRS.length],{speed:28}); pi++});
+
+  // EASTER EGG 2: the cursor in the footer types a hidden verse
+  var HID=['Si amé no importa,\nsolo importa que te amé.','El tiempo está herido.\nBajo tu ausencia\nun poema recorre.','Un círculo también\npuede salir a caminar.'], hi=0;
+  document.getElementById('secret').addEventListener('click',function(){typeInto(document.getElementById('secretOut'),HID[hi%HID.length]); hi++});
+
+  // EASTER EGG 3: type "moebius" on a keyboard
+  var buf='', toast=document.getElementById('toast'), tt;
+  document.addEventListener('keydown',function(e){
+    if(!lb.hidden){if(e.key==='Escape')closeLb(); if(e.key==='ArrowLeft')show(idx-1); if(e.key==='ArrowRight')show(idx+1); return}
+    if(!e.key||e.key.length!==1)return; buf=(buf+e.key.toLowerCase()).slice(-7);
+    if(buf==='moebius'){toast.hidden=false; typeInto(toast,'una cinta con un solo lado: el que escribe y el que lee caminan por la misma cara.',{speed:24}); clearTimeout(tt); tt=setTimeout(function(){toast.hidden=true},7000)}
+  });
+
+  // EASTER EGG 4: triple-tap the hero headline
+  var taps=0, tapT, hl=document.getElementById('heroLine'), orig=hl.textContent;
+  hl.addEventListener('click',function(){taps++; clearTimeout(tapT); tapT=setTimeout(function(){taps=0},600); if(taps===3){taps=0; typeInto(hl,'Miré con los ojos cerrados para encontrarte.',{speed:40}); setTimeout(function(){typeInto(hl,orig,{speed:40,keepCaret:false})},6000)}});
+
+  // ANIMATED MARK: strokes draw in, then the solid mark fades in
+  var MARK={w:1008,h:1131,p:["M466 1123C461 1123 451 1122 445 1122C434 1122 422 1121 408 1118C404 1117 397 1115 393 1114C389 1114 384 1112 382 1112C376 1109 371 1107 364 1106C357 1104 352 1102 342 1100C339 1099 336 1098 335 1098C334 1098 331 1097 330 1097C328 1096 324 1094 322 1094C320 1093 316 1091 314 1090C312 1090 310 1089 310 1089C309 1089 306 1088 302 1086C299 1084 294 1082 292 1082C285 1078 280 1076 275 1072C272 1070 267 1068 264 1066C257 1064 251 1061 248 1059C245 1056 242 1054 235 1051C233 1050 228 1047 224 1045C220 1042 216 1039 214 1038C208 1034 197 1026 194 1023C188 1018 186 1016 180 1011C175 1007 152 986 144 978C139 973 116 947 112 942C98 925 87 909 77 891C72 884 68 878 68 877C66 873 48 837 48 836C48 836 47 834 46 832C43 825 43 825 42 822C41 821 39 815 38 810C34 799 33 796 25 770C24 766 23 762 22 761C19 754 18 751 18 742C18 737 18 731 17 729C14 723 13 711 12 694C11 685 11 674 10 671C9 662 9 631 10 624C11 620 12 614 12 609C12 604 11 598 10 594C9 586 9 570 10 563C12 556 12 542 10 534C9 526 9 512 11 501C12 493 12 492 11 480C9 465 9 451 10 444C11 441 12 435 12 427C12 411 16 389 23 371C25 365 29 351 32 340C36 323 39 312 42 307C43 305 45 302 46 300C47 299 49 295 50 291C51 287 53 282 55 280C59 274 62 269 70 252C79 236 80 234 95 214C119 182 130 170 145 157C149 153 155 147 159 142C166 134 172 129 175 129C176 129 180 126 185 122C195 112 223 91 232 86C243 80 247 78 249 78C250 77 254 75 256 73C259 71 263 68 266 67C268 66 272 64 274 63C280 58 286 56 295 54C302 53 307 51 326 42C332 39 338 36 340 36C341 36 346 34 350 33C361 29 372 26 387 22C391 22 397 20 400 20C410 17 432 14 458 10C479 8 539 8 550 10C558 12 569 14 586 15C602 16 608 18 617 23C619 23 623 24 627 24C634 24 636 25 641 27C652 32 654 33 673 38C676 38 680 40 682 40C683 41 685 41 686 42C688 42 692 44 696 45C700 47 705 49 708 50C720 55 734 61 739 65C744 69 750 72 752 72C753 72 756 74 759 76C764 80 771 84 773 84C774 84 777 86 780 88C785 92 793 98 796 99C796 99 801 103 807 107C824 119 841 134 851 144C864 158 873 167 881 174C884 177 887 181 888 182C889 186 898 197 908 209C917 219 925 231 927 235C928 236 929 238 930 240C931 241 934 246 936 250C938 255 941 260 942 261C943 264 945 267 950 274C952 277 955 284 957 288C960 293 962 298 962 298C962 299 963 301 963 302C964 303 965 307 966 310C967 313 969 317 969 318C970 321 971 324 974 332C974 334 976 338 976 341C980 352 982 359 984 364C987 369 989 378 989 388C990 392 991 399 991 404C994 417 996 438 997 458C999 483 999 588 997 605C996 616 996 619 997 627C999 635 999 641 999 665C998 697 996 717 992 741C991 744 990 749 990 752C989 759 987 765 984 771C983 773 981 780 980 785C978 797 974 809 973 810C972 810 972 811 972 812C972 815 955 850 948 862C946 865 945 867 936 884C932 891 929 898 928 899C922 909 900 939 889 951C873 969 865 977 848 993C833 1007 825 1014 806 1026C804 1028 796 1033 790 1038C784 1043 778 1047 776 1048C748 1066 741 1069 731 1073C727 1074 723 1075 722 1077C718 1080 712 1083 710 1083C708 1083 691 1089 686 1091C685 1091 683 1092 681 1093C679 1094 675 1096 672 1097C663 1101 655 1104 652 1104C648 1104 634 1107 631 1109C630 1109 628 1111 627 1111C624 1113 612 1115 611 1114C610 1114 593 1116 586 1118C583 1118 576 1120 570 1120C564 1121 555 1122 550 1123C538 1125 479 1125 466 1123Z", "M474 1103C478 1102 482 1101 482 1100C483 1100 483 1061 483 992L484 885L480 882C479 881 476 880 475 879C474 879 471 878 470 878C468 877 464 877 460 877L454 876L453 976C452 1096 452 1099 460 1102C464 1104 466 1104 474 1103Z", "M532 1102L537 1101L537 992L536 882L524 882C514 882 511 882 509 883C508 885 507 887 507 912C506 927 506 977 507 1022L507 1104L517 1104C523 1103 530 1103 532 1102Z", "M574 1099C576 1098 581 1097 585 1096L591 1095L591 1018C591 972 591 931 592 916C594 885 593 869 588 863C587 861 585 859 585 859C584 859 582 861 579 863C577 865 571 868 568 870L561 873L561 945C561 985 561 1028 560 1040C559 1060 559 1066 560 1078C562 1095 564 1102 567 1101C568 1100 571 1100 574 1099Z", "M429 1066C431 980 431 909 430 889C429 866 428 865 421 858C417 854 402 844 400 844C399 844 399 869 399 933C398 1072 398 1078 400 1087L402 1095L413 1096C419 1097 425 1098 426 1098L428 1098L429 1066Z", "M636 1086C639 1085 642 1084 643 1083C645 1083 645 1076 645 950L645 816L642 815C640 814 638 813 638 813C638 813 636 815 635 817C634 819 629 824 625 828C613 841 612 842 611 860C611 868 611 886 611 902C612 917 612 965 612 1008L612 1086L617 1087C622 1089 629 1089 636 1086Z", "M375 982C376 925 376 871 377 862C378 846 377 833 375 824C375 821 370 813 366 809C364 807 352 798 351 798C351 798 350 797 349 796C348 796 347 795 346 795C345 796 345 838 345 936L345 1077L352 1080C355 1082 359 1083 360 1083C361 1083 364 1084 366 1084C369 1085 372 1086 373 1086C374 1085 375 1073 375 982Z", "M674 1073C676 1072 678 1071 680 1071C682 1071 685 1070 687 1069C689 1068 692 1067 695 1066L699 1065L699 915L699 765L696 764L693 762L687 767C683 770 678 775 675 778C670 783 669 784 668 789C667 793 667 801 667 810C667 840 670 1074 670 1074C670 1074 672 1074 674 1073Z", "M319 1067C324 1065 324 1064 323 1058C320 1050 319 1023 320 1002C320 991 321 942 321 892C321 814 321 801 323 793C323 788 324 782 324 780C323 774 318 763 314 759C306 752 293 744 292 745C291 745 291 797 290 861C289 943 289 988 290 1014L291 1052L293 1055C295 1057 297 1059 298 1059C300 1059 306 1063 309 1065C312 1068 314 1069 319 1067Z", "M740 1044C744 1042 748 1040 750 1039L753 1038L753 876L753 714L750 713L747 711L737 720C731 725 726 730 725 731C724 732 722 736 721 741C720 748 720 753 720 776C721 791 721 851 721 909C722 1016 722 1039 725 1046L727 1050L731 1048C733 1047 737 1045 740 1044Z", "M267 1020C267 1009 268 949 268 887C269 825 269 765 270 754C270 721 268 713 254 701C249 696 238 690 238 691C237 691 237 743 236 805C235 910 235 1011 237 1020C237 1023 239 1025 241 1028C245 1032 262 1041 265 1041C266 1041 267 1037 267 1020Z", "M782 1017C783 1017 786 1015 788 1014C789 1013 792 1011 794 1010C799 1008 807 999 808 993C810 987 810 981 808 841C808 786 807 723 807 702L807 664L803 662C800 660 799 660 798 662C796 665 794 667 785 676C782 679 778 683 776 685L774 689L774 846C774 933 774 1005 775 1006C776 1014 777 1019 778 1019C778 1019 780 1018 782 1017Z", "M213 900C214 787 213 678 211 668C210 662 206 656 200 651C196 647 185 642 184 643C183 643 181 853 181 942C180 980 181 984 194 996C200 1001 209 1007 212 1007C212 1007 213 978 213 900Z", "M837 972C844 967 855 958 859 953C864 946 864 945 863 864C863 823 862 750 861 701L861 612L858 611L855 609L846 617C826 635 825 636 826 673C826 734 828 973 829 974C829 976 830 975 837 972Z", "M162 822C162 748 163 679 164 669C165 633 162 618 151 605C145 598 133 590 130 591C129 592 129 609 129 674C129 719 128 784 128 819C126 913 126 920 132 930C136 936 142 945 148 952C152 957 152 957 157 957L162 956L162 822Z", "M894 909C903 898 908 890 912 884C917 874 917 869 916 805C916 774 915 706 915 655L915 561L912 560L909 558L905 562C902 564 900 566 899 566C898 568 890 575 885 579L882 582L881 733C881 880 881 903 884 912C885 914 886 916 886 916C887 916 890 913 894 909Z", "M108 814C109 699 109 580 109 573L108 566L97 555C89 547 85 544 82 542C79 541 76 540 76 541C75 541 75 594 75 659C74 724 74 786 73 798C73 827 74 838 80 852C84 861 86 865 89 869C93 874 96 879 96 882C96 885 104 891 106 891C107 890 108 863 108 814Z", "M528 859C554 853 567 847 588 830C602 819 610 812 645 777C665 758 684 739 689 735C693 732 700 726 703 723C710 717 713 714 726 701C734 692 741 685 759 669C765 663 773 656 777 652C785 645 788 642 798 633C820 614 833 601 840 592C846 584 851 580 856 579C857 578 862 574 867 569C878 557 881 554 899 537C919 518 924 514 930 509C941 501 942 499 942 492C942 487 940 481 936 475C931 467 928 461 927 458C926 456 924 452 922 450L919 447L907 459C901 465 891 475 886 479C874 490 864 499 858 506C846 518 835 529 828 534C824 537 816 544 811 550C788 573 766 594 745 614C741 617 736 622 732 626C728 629 721 636 714 642C708 647 693 661 681 673C669 686 656 698 652 700C649 702 641 710 635 716C619 734 615 737 602 747C592 754 579 763 574 765C573 766 572 766 571 767C566 770 549 776 537 778C528 781 488 781 480 779C478 778 474 777 473 777C468 777 449 771 436 765C433 763 430 762 430 762C429 762 427 761 424 759C422 757 420 756 420 756C419 756 416 754 412 751C403 745 394 737 374 717C364 708 352 697 346 692C341 688 333 680 328 675C323 670 316 663 312 659C308 654 300 646 294 641C281 630 273 623 260 609C254 603 243 593 235 587C227 580 216 569 209 562C191 543 189 540 177 531C171 526 162 517 156 511C132 486 91 448 87 448C85 448 80 456 75 467C64 488 64 488 69 496C74 501 103 532 116 543C121 548 135 560 146 571C157 581 168 592 171 594C174 596 186 608 197 619C224 646 245 666 254 673C260 678 269 687 284 703C289 709 297 716 300 718C314 730 327 741 333 748C337 752 340 756 340 756C340 756 343 759 347 762C350 764 356 770 360 774C365 777 378 790 390 801C418 830 432 841 447 849C462 856 466 857 476 859C479 860 482 860 482 861C483 861 492 861 502 861C516 861 523 861 528 859Z", "M945 818C952 805 956 792 962 768C962 764 964 758 965 755C967 743 970 727 974 704C976 686 976 624 974 606C971 586 969 578 965 559C964 555 962 548 961 543C958 530 956 526 950 521C948 519 948 519 944 522C938 526 936 530 934 540C933 548 933 553 934 580C934 596 934 650 935 700C935 821 936 833 945 818Z", "M52 768C54 764 54 762 54 747C54 734 54 730 53 727C51 722 51 716 53 711C54 707 54 697 54 630C54 558 54 554 53 548C52 544 50 541 50 541C49 539 46 542 45 545C45 547 44 551 43 553C41 562 37 584 35 600C29 646 30 684 38 723C41 743 42 748 43 751C44 753 45 758 45 762C47 768 48 772 50 772C50 772 51 770 52 768Z", "M530 757C533 757 537 755 538 755C540 754 543 753 544 753C550 751 556 749 557 748C558 747 559 747 560 747C563 747 575 741 582 735C604 718 619 704 631 691C641 680 651 671 662 661C666 658 674 651 679 645C699 625 706 618 716 609C723 604 737 590 748 579C759 568 773 554 780 549C786 544 799 531 810 520C820 510 831 499 835 497C841 493 856 479 870 464C874 459 884 449 893 441C901 433 908 426 908 426C908 425 906 423 894 405C881 387 879 386 868 397C859 406 847 416 844 419C840 422 822 439 809 453C799 463 798 463 787 472C783 475 775 483 769 490C763 497 750 509 740 517C723 532 717 537 709 546C703 553 692 563 678 576C671 581 655 597 641 610C627 624 614 636 612 638C601 647 596 651 596 651C595 651 592 653 589 655C585 658 581 660 578 661C576 663 574 664 573 665C572 665 569 667 566 668C563 669 560 670 560 670C558 671 546 675 544 675C542 675 540 676 528 679C525 680 518 680 512 681C503 681 500 681 495 680C492 679 484 678 477 677C465 676 461 675 446 670C441 668 431 663 426 660C425 659 423 658 422 657C421 657 419 655 416 654C414 653 410 650 407 648C397 641 386 631 361 606C356 600 348 593 344 590C334 581 325 574 316 563C301 547 279 526 273 522C270 520 255 507 240 492C226 478 209 462 204 457C198 452 185 439 175 430C165 420 155 411 153 410C150 408 146 404 142 400C137 393 130 387 127 387C126 387 110 408 107 413C105 417 102 426 102 428C102 428 105 432 109 435C113 438 125 450 134 460C148 474 154 480 160 484C166 488 171 493 177 500C181 505 189 512 193 516C198 519 204 526 207 530C212 537 215 539 219 541C223 543 229 548 243 562C253 572 264 583 267 587C270 592 273 594 276 595C281 597 284 599 294 610C296 613 303 620 308 625C314 630 321 637 323 640C328 645 335 651 337 651C338 651 354 667 354 668C354 668 359 674 366 679C372 685 380 693 384 697C388 702 392 705 395 707C398 708 404 714 411 721C421 731 427 736 436 742C438 742 442 744 446 746C450 748 455 751 456 752C458 752 460 753 461 753C462 753 465 754 476 757C485 760 520 760 530 757Z", "M523 657C531 656 541 654 546 652C562 646 569 643 578 637C583 634 598 622 600 620C600 620 603 617 606 615C609 612 623 598 638 584C652 570 667 556 672 552C676 549 685 541 691 535C710 515 716 509 728 498C743 485 747 481 766 463C774 455 786 444 792 438C798 432 816 415 832 400C859 374 861 372 861 368C861 363 857 357 845 346C836 337 834 336 831 336C829 336 826 337 825 338C823 340 819 343 815 346C804 356 791 367 766 394C760 400 751 408 745 412C740 417 731 425 725 431C709 449 704 453 690 464C686 467 672 480 659 494C646 507 631 521 626 525C622 528 615 534 612 538C608 542 605 546 604 547C602 549 594 555 594 555C593 555 591 556 589 558C585 561 571 567 569 567C569 567 567 568 565 568C560 571 555 573 550 575C547 576 543 577 541 578C538 579 531 579 506 579C477 579 473 579 468 577C464 576 460 575 459 574C454 572 450 570 444 569C430 565 420 559 403 544C389 530 381 524 372 517C364 510 353 499 332 478C326 471 317 463 313 459C304 453 291 440 277 425C273 421 263 412 256 406C241 394 227 380 216 368C209 360 193 345 189 341C188 340 184 338 181 336L175 333L163 345C150 358 147 363 147 369C147 372 147 372 158 381C160 383 166 389 171 394C180 404 181 406 191 414C214 434 225 444 241 461C249 470 261 481 276 494C283 501 295 512 302 520C310 527 319 535 322 537C326 540 331 545 336 550C340 555 346 562 350 565C353 567 361 575 368 582C375 588 383 595 385 597C388 599 390 600 390 601C390 601 395 607 401 613C412 624 423 633 434 640C441 644 455 651 457 651C457 651 459 652 461 652C462 653 464 654 465 654C466 654 470 655 472 655C475 656 480 657 483 658C489 659 513 659 523 657Z", "M521 559C527 558 534 557 535 556C536 555 538 555 539 555C540 555 543 554 545 553C547 553 550 551 552 551C559 547 569 543 573 540C587 532 597 524 610 511C616 505 624 497 626 493C630 489 632 487 636 485C640 483 644 480 647 476C654 469 668 455 671 453C672 452 676 448 681 442C687 435 689 433 694 431C697 429 701 426 704 422C707 419 713 413 717 410C727 400 737 390 746 380C750 376 755 372 756 372C757 372 762 368 776 352C777 351 785 344 793 336C802 327 809 320 809 319C809 317 791 299 782 293L774 288L766 293C759 298 756 301 738 319C729 328 722 335 705 351C691 364 693 362 679 375C673 381 661 391 654 399C646 406 632 419 622 429C605 446 597 453 588 457C586 458 584 459 583 459C582 459 579 461 576 462C566 468 560 471 554 473C547 474 541 476 536 479C531 481 489 481 479 479C475 478 471 477 470 477C453 474 421 460 407 448C393 437 368 413 362 405C361 403 358 401 355 400C352 399 346 394 332 379C322 369 312 358 309 355C306 350 304 348 299 346C294 344 291 341 284 334C258 305 235 286 231 289C229 289 218 300 205 311C202 315 199 318 199 318C199 319 218 340 230 352C240 362 246 368 258 378C270 389 276 394 292 409C299 417 308 424 310 426C312 428 320 435 327 441C334 448 348 462 359 473C370 483 386 498 395 507C408 520 423 533 432 538C436 541 447 546 448 546C449 546 455 549 462 552C471 557 475 558 478 558C480 558 484 558 486 559C493 560 508 560 521 559Z", "M517 460C532 457 539 456 542 454C544 453 547 452 548 451C550 451 557 447 564 444C584 434 603 420 624 398C630 391 640 382 645 376C687 336 705 319 716 311C731 298 745 284 748 278C750 273 750 273 742 269C735 266 724 260 718 258C716 256 713 255 711 254C710 254 708 253 707 253C706 252 702 254 695 262C689 267 679 276 673 281C667 286 657 295 652 300C629 325 620 333 606 344C600 348 592 354 588 357C576 368 573 370 566 374C562 376 558 378 554 378C548 379 539 381 534 383C523 387 520 387 505 387C497 386 488 386 485 385C465 381 459 379 454 376C452 376 451 375 450 375C449 375 436 369 432 366C429 365 427 363 426 363C412 354 391 336 366 310C355 300 343 288 339 285C328 276 325 274 318 266C311 257 305 252 301 252C298 252 280 260 274 264C273 266 271 267 270 267C264 270 259 274 259 276C259 280 275 296 290 307C295 311 303 319 308 324C323 341 332 349 342 357C347 361 355 368 358 372C377 391 388 401 398 410C402 413 410 420 416 426C426 435 429 438 433 439C436 440 440 443 442 444C447 448 451 449 460 451C464 452 470 454 473 456C485 462 502 464 517 460Z", "M75 425C75 424 77 421 78 419C80 417 81 415 81 415C81 414 84 409 88 403C92 397 97 390 99 388C101 385 105 380 108 376C111 372 115 367 117 364C118 361 123 356 126 352C134 345 142 337 153 326C168 310 178 301 188 295C194 291 203 284 208 280C218 273 227 267 232 264C234 263 236 262 238 261C239 260 241 259 242 258C244 257 246 256 248 255C249 254 251 253 252 252C253 252 257 250 261 248C267 244 273 241 276 240C277 239 278 239 279 238C280 238 281 237 282 237C283 236 284 236 285 235C286 235 288 234 290 233C292 232 295 231 298 230C304 227 307 225 312 224C314 223 318 221 320 221C323 219 328 217 335 215C337 214 341 212 344 211C348 210 352 209 354 208C361 206 374 203 386 199C390 199 394 197 397 196C399 196 402 195 404 195C405 195 409 194 413 194C432 189 434 189 450 189C461 189 468 189 472 187C478 186 502 185 516 187C527 188 532 189 554 191C586 193 604 196 630 203C642 205 657 210 661 212C663 212 665 213 666 213C666 213 668 214 670 214C673 216 676 217 686 221C691 222 694 224 700 226C702 227 705 228 705 228C706 228 709 229 713 231C724 236 725 237 734 241C739 243 746 246 749 248C752 250 755 252 756 252C757 253 759 254 760 255C762 256 764 257 765 258C768 259 798 279 805 285C809 288 813 291 815 292C824 298 838 311 851 323C865 336 868 338 881 353C893 366 900 375 924 408C930 416 933 418 935 416C936 415 936 415 935 413C934 412 933 411 933 410C933 408 922 386 916 377C912 370 907 362 897 349C894 344 889 338 888 336C880 325 859 301 843 286C817 260 800 247 777 232C770 227 762 222 761 221C759 220 758 219 758 219C757 219 755 218 753 216C751 215 749 213 748 213C746 212 743 210 739 208C723 200 702 189 689 185C687 184 683 182 682 182C681 181 678 180 677 180C676 180 672 178 669 177C666 176 662 174 660 174C659 174 656 173 654 172C652 171 649 170 647 169C640 167 624 163 614 161C609 160 603 158 600 157C594 156 590 156 566 152C549 149 518 148 484 149C461 150 451 151 450 151C449 152 443 153 437 154C404 159 390 162 376 166C373 167 369 168 366 169C362 170 358 172 356 172C353 173 349 175 346 176C339 177 333 179 328 181C327 182 323 184 321 184C319 185 315 187 313 188C311 188 309 190 307 190C305 191 302 192 300 193C294 196 270 208 266 210C265 211 263 212 262 213C260 214 258 215 256 216C255 217 253 218 252 219C250 220 248 221 247 222C245 223 241 225 237 228C234 230 230 233 229 233C226 235 201 254 193 260C189 263 178 274 167 285C156 296 145 307 141 310C136 314 135 316 133 320C132 324 129 327 124 333C116 341 109 352 98 370C95 374 91 380 90 382C89 384 87 386 87 387C86 388 85 390 84 392C80 397 78 402 78 404C78 406 74 412 71 414C69 416 69 417 69 420C70 426 73 429 75 425Z", "M939 364C938 361 937 357 933 348C933 346 930 343 928 340C926 338 923 334 922 332C917 320 914 314 902 296C899 292 885 275 883 273C881 272 873 260 873 258C873 258 860 244 843 227C816 200 812 196 794 183C778 171 773 168 756 159C745 154 731 146 725 142C719 138 714 135 713 135C713 135 711 134 709 134C705 131 696 128 688 125C686 124 682 122 680 121C678 121 676 120 675 120C675 120 673 119 671 119C669 118 665 116 662 116C649 112 645 111 641 109C633 105 626 103 614 100C608 99 600 98 598 97C594 96 581 94 558 91C540 89 495 88 485 89C481 90 475 90 473 90C470 90 462 91 456 93C448 94 442 95 430 96C417 96 415 97 409 99C406 101 402 102 400 102C394 102 375 106 368 109C362 112 355 114 352 114C349 114 339 118 330 122C325 124 318 126 314 128C309 129 304 131 300 134C294 138 291 139 280 144C265 151 259 154 256 156C254 157 252 158 251 159C250 159 245 162 232 171C223 177 200 194 190 203C159 229 126 267 103 302C101 306 97 312 94 315C92 318 89 323 88 326C87 328 85 333 82 336C80 339 78 344 77 346C76 349 73 352 72 354C69 356 69 357 69 360C70 362 70 365 71 365C72 367 75 366 75 365C75 364 76 362 78 359C80 357 81 355 81 354C81 354 83 351 86 347C88 344 92 337 95 334C107 316 135 284 154 266C164 256 168 252 180 243C184 239 189 235 190 233C192 232 196 229 199 227C202 226 207 222 210 220C228 205 234 201 246 195C250 193 254 191 255 191C256 190 259 189 262 188C264 186 269 183 272 182C281 177 304 166 309 164C311 163 315 161 317 160C319 160 321 159 322 159C322 159 324 158 326 158C333 155 356 148 379 142C382 142 388 140 391 139C406 136 409 135 418 134C423 133 432 131 436 131C449 128 506 128 536 129C553 130 562 131 568 132C573 133 582 134 590 135C597 135 604 136 606 137C610 139 615 141 617 141C622 141 638 144 644 147C648 149 656 151 660 152C673 154 678 156 701 167C718 175 721 176 727 179C737 183 756 192 762 195C763 196 765 197 766 198C767 198 774 203 781 209C789 215 798 221 801 223C805 225 810 229 813 232C816 234 822 240 827 243C838 251 854 265 864 274C871 282 889 302 898 313C912 331 927 351 930 357C934 363 939 369 940 368C940 368 940 366 939 364Z", "M524 365C526 364 531 362 535 361C539 361 543 359 544 358C546 358 551 356 554 354C558 352 561 351 561 351C562 351 566 349 571 346C578 342 583 337 596 324C605 315 618 303 624 297C630 291 639 284 642 280C646 276 651 272 653 270C667 256 679 245 679 243C679 241 660 231 656 231C653 231 643 228 641 227C639 225 633 223 630 222C626 221 619 226 606 239C586 257 567 272 559 276C558 277 556 278 554 279C553 280 550 281 549 282C548 283 546 283 544 284C527 291 508 293 486 289C475 287 472 286 457 281C451 278 451 278 448 276C446 275 443 273 441 272C430 266 415 252 393 229L386 222L381 222C376 223 371 225 364 228C359 230 352 233 344 235C332 239 330 240 330 243C330 245 331 247 336 251C340 253 348 261 354 268C378 293 384 300 389 302C391 303 395 306 398 309C400 312 408 319 414 326C428 340 433 344 439 347C442 348 450 351 458 355C471 362 479 365 488 366C495 367 519 366 524 365Z", "M941 311C942 311 941 309 941 306C940 304 939 301 939 300C938 298 936 295 934 292C930 287 928 284 920 269C912 252 894 226 880 210C855 178 834 157 808 136C799 129 794 125 770 109C762 104 753 98 751 96C749 95 745 93 742 92C740 91 735 88 731 85C727 83 724 81 723 81C723 81 722 80 721 80C719 78 713 76 705 73C701 72 696 70 692 68C682 63 676 60 675 60C675 60 673 59 671 59C667 57 659 55 648 52C644 51 638 49 636 48C629 44 622 43 603 39C599 38 595 38 571 34C565 34 555 32 550 31C532 29 520 28 510 28C498 28 477 30 470 32C467 32 457 34 448 35C429 36 417 38 412 41C410 41 404 42 399 42C392 42 386 43 381 46C379 47 375 48 361 53C357 54 350 57 344 59C339 60 333 62 332 63C331 63 327 65 324 66C321 67 317 69 316 69C313 70 299 76 276 88C263 93 244 105 232 113C229 115 226 117 225 117C225 117 217 123 205 132C185 147 158 173 142 191C138 196 130 206 125 213C119 220 112 229 108 233C103 239 101 242 97 251C96 253 94 258 92 261C90 264 88 268 87 269C87 270 84 274 80 281C77 286 69 303 69 305C69 307 71 306 75 301C79 297 87 286 99 269C106 259 118 244 128 234C148 212 185 177 187 177C189 177 197 172 205 165C220 151 235 141 239 141C240 141 247 137 252 133C258 129 260 128 269 125C273 124 278 121 281 119C287 115 301 108 313 104C315 103 319 101 320 100C322 100 324 99 325 99C326 99 327 99 328 98C328 97 330 96 332 96C334 96 339 94 342 93C346 91 352 89 356 88C359 88 363 86 366 85C368 85 373 83 378 82C382 82 388 80 392 79C438 69 442 69 496 69C535 69 543 69 554 70C585 75 600 78 605 80C607 80 612 81 617 81C623 81 627 82 630 83C632 83 635 85 636 86C638 86 642 88 645 89C648 89 652 91 654 92C659 93 673 98 676 99C681 100 696 106 698 107C700 107 708 111 716 115C744 126 750 129 757 134C760 136 764 139 766 140C769 141 772 143 774 144C775 145 777 146 778 147C786 151 796 158 801 162C806 167 812 171 814 171C815 171 819 174 824 179C828 183 836 191 842 196C863 213 875 227 899 255C906 264 918 280 918 281C918 282 921 287 925 292C929 298 933 305 934 307C936 311 937 312 939 312C940 312 941 312 941 311Z", "M516 268C519 268 523 267 524 267C527 267 530 266 541 262C547 260 561 251 565 247C567 245 571 241 574 238C576 235 581 230 584 229C589 225 594 219 594 217C592 215 558 211 528 208C501 206 482 206 480 208C479 210 477 210 472 210C466 210 449 212 435 214C431 215 426 215 423 216C420 216 418 217 417 218C416 221 424 231 432 238C435 239 439 243 443 246C449 252 464 263 468 264C469 264 471 265 472 265C483 270 505 271 516 268Z"]};
+  function mountMark(host){
+    var g=MARK.p.map(function(d,i){return '<path d="'+d+'" pathLength="1" style="--i:'+i+'"/>'}).join('');
+    host.innerHTML='<svg class="mk" viewBox="0 0 '+MARK.w+' '+MARK.h+'" aria-hidden="true"><g class="st">'+g+'</g><path class="fl" fill-rule="evenodd" d="'+MARK.p.join('')+'"/></svg>';
+    return host.firstChild;
+  }
+  function playMark(svg){svg.classList.remove('play'); void svg.getBoundingClientRect(); svg.classList.add('play')}
+  var hsvg=mountMark(document.getElementById('hmark')), fsvg=mountMark(document.getElementById('fmark')), fword=document.getElementById('fword');
+  if(reduce){hsvg.classList.add('play'); fsvg.classList.add('play')} else {
+    requestAnimationFrame(function(){playMark(hsvg)});
+    document.getElementById('logo').addEventListener('click',function(){playMark(hsvg)});
+    if('IntersectionObserver' in window){
+      var fo=new IntersectionObserver(function(e){if(e[0].isIntersecting){fo.disconnect(); playMark(fsvg); fword.textContent=''; setTimeout(function(){typeInto(fword,'moebius OP',{speed:70,keepCaret:false})},1500)}},{threshold:.6});
+      fo.observe(fsvg);
+    } else fsvg.classList.add('play');
+  }
+
+  // ANT: Guita wanders along the bottom of the footer
+  (function(){
+    var lane=document.getElementById('antlane'), ant=document.getElementById('ant'), AW=30;
+    var x=40, dir=1, target=200, pause=0, last=0, on=false, raf=0;
+    function pick(){var W=lane.clientWidth-AW; target=Math.max(0,Math.min(W,x+(Math.random()<.5?-1:1)*(60+Math.random()*Math.max(80,W*.6)))); if(Math.abs(target-x)<20)target=Math.random()*W; dir=target>x?1:-1}
+    function place(){ant.style.transform='translateX('+x.toFixed(1)+'px) scaleX('+dir+')'}
+    function tick(t){
+      if(!on)return; var dt=last?Math.min(.05,(t-last)/1000):0; last=t;
+      if(pause>0){pause-=dt; ant.classList.remove('walk'); if(pause<=0)pick()}
+      else{ant.classList.add('walk'); var step=16*dt*(target>x?1:-1); if(Math.abs(target-x)<=Math.abs(step)){x=target; pause=Math.random()<.55?.6+Math.random()*2.2:0; if(pause<=0)pick()} else x+=step}
+      place(); raf=requestAnimationFrame(tick);
+    }
+    x=Math.random()*Math.max(1,lane.clientWidth-AW); pick(); place();
+    if(reduce)return;
+    if('IntersectionObserver' in window){new IntersectionObserver(function(e){on=e[0].isIntersecting; last=0; if(on){cancelAnimationFrame(raf); raf=requestAnimationFrame(tick)} else ant.classList.remove('walk')}).observe(lane)}
+    ant.addEventListener('click',function(){pause=1.4; toast.hidden=false; typeInto(toast,'Guita, la hormiga, camina la cinta de Moebius: nunca encuentra el otro lado.',{speed:24}); clearTimeout(tt); tt=setTimeout(function(){toast.hidden=true},7000)});
+  })();
+
+  try{console.log('%cmoebius OP\n%cescribe «moebius» en la página.','font:700 14px Courier New','font:12px Courier New')}catch(e){}
+})();
+</script>
+
+</body>
+</html>
