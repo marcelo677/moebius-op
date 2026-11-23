@@ -345,7 +345,7 @@ fueron el mismo amor.</p>
   <div class="lb-top"><span id="lbCount">01 / 05</span><button class="ic" type="button" id="lbClose" aria-label="Cerrar">×</button></div>
   <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""><video id="lbVid" muted loop playsinline hidden></video></div>
   <div class="lb-cap" id="lbCap"></div>
-  <div class="lb-nav"><button class="ic" type="button" id="lbPrev" aria-label="Anterior">←</button><a class="btn wa" id="lbAsk" data-msg="Hola Orlando, quiero esta gorra." href="#" target="_blank" rel="noopener" style="min-height:46px">La quiero</a><button class="ic" type="button" id="lbNext" aria-label="Siguiente">→</button></div>
+  <div class="lb-nav"><button class="ic" type="button" id="lbPrev" aria-label="Anterior">←</button><a class="btn wa" id="lbAsk" data-msg="Hola Orlando, quiero esta gorra." href="#" target="_blank" rel="noopener" style="min-height:46px">La quiero · $300</a><button class="ic" type="button" id="lbNext" aria-label="Siguiente">→</button></div>
 </div>
 
 <script>
@@ -409,7 +409,7 @@ fueron el mismo amor.</p>
       '<span class="idx">['+String(k+1).padStart(2,'0')+'] '+esc(c.ph.toUpperCase())+'</span>'+
       '<button class="full" type="button" aria-label="Ver a pantalla completa">⤢</button>'+
       '<div class="meta"><div class="nm">'+esc(c.name)+' · '+esc(c.id.charAt(0)+c.id.slice(1).toLowerCase())+'</div><div class="vs">«'+esc(c.lines.join(' '))+'»</div><div class="sp">'+c.sku+'</div>'+
-      '<a class="ask wa" data-msg="Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+'." href="#" target="_blank" rel="noopener"><span>La quiero</span><span>→</span></a></div>';
+      '<a class="ask wa" data-msg="Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+' ($300 MXN)." href="#" target="_blank" rel="noopener"><span>La quiero · $300 MXN</span><span>→</span></a></div>';
     var vs=el.querySelector('.vs'), stage=el.querySelector('.stage'), verse='«'+c.lines.join(' ')+'»', typed=false;
     function typeVerse(){if(!typed){typed=true; typeInto(vs,verse,{speed:30,keepCaret:false})}}
     stage.addEventListener('mouseenter',typeVerse);
@@ -455,7 +455,7 @@ fueron el mismo amor.</p>
   // lightbox
   var lb=document.getElementById('lb'), img=document.getElementById('lbImg'), cap=document.getElementById('lbCap'), lc=document.getElementById('lbCount'), ask=document.getElementById('lbAsk'), idx=0, last=null;
   var vid=document.getElementById('lbVid'), LIST=[];
-  function capItem(c){return {src:c.photo,alt:'Foto real de la gorra '+c.name,tag:c.ph,text:c.name+' · '+c.id.toLowerCase()+' · «'+c.lines.join(' ')+'»',msg:'Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+'.'}}
+  function capItem(c){return {src:c.photo,alt:'Foto real de la gorra '+c.name,tag:c.ph,text:c.name+' · '+c.id.toLowerCase()+' · «'+c.lines.join(' ')+'» · $300 MXN',msg:'Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+' ($300 MXN).'}}
   function show(i){idx=(i+LIST.length)%LIST.length; var it=LIST[idx];
     if(it.video){img.hidden=true; vid.hidden=false; vid.poster=it.src; vid.src=it.video; var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){})} else {vid.pause(); vid.removeAttribute('src'); vid.hidden=true; img.hidden=false; img.src=it.src; img.alt=it.alt}
     lc.textContent=String(idx+1).padStart(2,'0')+' / '+String(LIST.length).padStart(2,'0')+' · '+it.tag.toUpperCase(); ask.href=wa(it.msg); typeInto(cap,it.text,{speed:22,keepCaret:false})}
