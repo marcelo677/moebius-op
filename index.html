@@ -75,25 +75,8 @@ section{border-top:1px solid var(--line)}
 .colibri{padding-block:22svh 30svh;overflow:hidden}
 .cstage{position:relative;width:min(100%,640px);aspect-ratio:510.96/455.88;margin:0 auto 9svh}
 .cstage img{position:absolute;inset:0;width:100%;height:100%;display:block}
-.c-flor{transform-origin:30% 51%;opacity:.35;transform:scale(.94);transition:opacity 1.6s ease,transform 1.6s ease}
-.c-ave{opacity:0;transform:translate(85%,-30%) rotate(-10deg)}
-.colibri .c-poem{font-size:clamp(17px,5.3vw,40px);opacity:0;transform:translateY(14px);transition:opacity 1.4s ease .2s,transform 1.4s ease .2s}
-.colibri.on .c-flor{opacity:1;transform:scale(1)}
-.colibri.on .c-ave{animation:cEnter 3.4s cubic-bezier(.3,.7,.25,1) .5s forwards, cHover 2.6s ease-in-out 3.9s infinite}
-.colibri.touch .c-flor{animation:cNectar 2.2s ease-out}
-.colibri.touch .c-poem{opacity:1;transform:none}
-@keyframes cEnter{
- 0%{opacity:0;transform:translate(85%,-30%) rotate(-10deg)}
- 14%{opacity:1}
- 30%{transform:translate(48%,-6%) rotate(6deg)}
- 46%{transform:translate(30%,-18%) rotate(-5deg)}
- 62%{transform:translate(14%,-2%) rotate(4deg)}
- 76%{transform:translate(7%,-7%) rotate(-2deg)}
- 88%{transform:translate(1.5%,-.5%) rotate(.6deg)}
- 100%{opacity:1;transform:translate(0,0) rotate(0)}}
-@keyframes cHover{0%,100%{opacity:1;transform:translate(0,0)}50%{opacity:1;transform:translate(.5%,-.9%) rotate(-.6deg)}}
-@keyframes cNectar{0%{transform:scale(1);filter:none}25%{transform:scale(1.045);filter:drop-shadow(0 0 14px rgba(236,230,218,.45))}100%{transform:scale(1);filter:none}}
-@media (prefers-reduced-motion:reduce){.c-flor,.c-ave,.c-poem{opacity:1!important;transform:none!important}}
+.colibri .c-poem{font-size:clamp(17px,5.3vw,40px)}
+.cafe-il{display:block;width:min(100%,420px);height:auto;margin:0 0 7svh}
 .poem{margin:0;font-size:clamp(24px,6.6vw,40px);line-height:1.34;white-space:pre-line}
 .sig{margin-top:34px;font-size:11px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
 .sig::before{content:"— "}
@@ -269,6 +252,7 @@ ella le entrega su néctar.</p>
 <section id="poema">
   <div class="wrap sec">
     <div class="sec-head"><span class="lbl"><b>[003]</b> Poema</span></div>
+    <img class="cafe-il" src="img/cafe.svg" alt="" aria-hidden="true">
     <p class="typed" id="typed" aria-label="Un café y sus ojos fueron el mismo amor.">Un café y sus ojos
 fueron el mismo amor.</p>
   </div>
@@ -483,11 +467,6 @@ fueron el mismo amor.</p>
   var sx=null, st=document.getElementById('lbStage');
   st.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
   st.addEventListener('touchend',function(e){if(sx===null)return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40)show(idx+(dx<0?1:-1)); sx=null});
-
-  // colibrí: entra, toca la flor, el poema aparece
-  (function(){var sec=document.getElementById('colibri'); if(!sec)return;
-    if(reduce||!('IntersectionObserver' in window)){sec.classList.add('on','touch');return}
-    var co=new IntersectionObserver(function(e){if(e[0].isIntersecting){co.disconnect(); sec.classList.add('on'); setTimeout(function(){sec.classList.add('touch')},3750)}},{threshold:.35}); co.observe(sec)})();
 
   // typed poem on scroll
   var t=document.getElementById('typed'), full=t.textContent;
