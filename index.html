@@ -132,7 +132,9 @@ section{border-top:1px solid var(--line)}
 
 /* clip */
 .clip{margin:0 0 18px;border:1px solid var(--line);background:var(--panel)}
-.clip video{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;max-width:100%}
+.clip video,.clip img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;max-width:100%;height:auto}
+.clips{display:grid;gap:18px;margin:0 0 18px}.clips .clip{margin:0}
+@media (min-width:760px){.clips{grid-template-columns:1fr 1fr}}
 .clip figcaption{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border-top:1px solid var(--line)}
 
 /* map */
@@ -261,7 +263,10 @@ fueron el mismo amor.</p>
 <section id="donde">
   <div class="wrap sec">
     <div class="sec-head"><span class="lbl"><b>[004]</b> Dónde</span><span class="lbl">CDMX 06700</span></div>
-    <figure class="clip"><video id="david" src="img/v_david.mp4" poster="img/v_david_poster.jpg" muted loop playsinline preload="metadata" aria-label="Acercamiento lento al rostro del David en la Plaza Río de Janeiro"></video><figcaption><span>[02] Plaza Río de Janeiro</span><span>19.4206° N · 99.1613° W</span></figcaption></figure>
+    <div class="clips">
+      <figure class="clip"><img src="img/roma_fuente_mercurio.jpg" alt="Fuente de Mercurio y Argos entre árboles en la Roma Norte" width="1050" height="1400" decoding="async"><figcaption><span>[02] Mercurio y Argos</span><span>Roma Norte</span></figcaption></figure>
+      <figure class="clip"><img src="img/roma_fuente_jardin.jpg" alt="Fuente con chorros de agua en un jardín arbolado de la Roma Norte" width="1024" height="768" decoding="async"><figcaption><span>[03] La fuente</span><span>Roma Norte</span></figcaption></figure>
+    </div>
     <div class="mapbox">
       <svg viewBox="0 0 400 480" role="img" aria-label="Mapa ilustrado de la Roma Norte con cuatro puntos">
         <defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V5" stroke="#ECE6DA" stroke-width=".5" opacity=".25"/></pattern></defs>
@@ -441,9 +446,6 @@ fueron el mismo amor.</p>
   if('IntersectionObserver' in window&&!reduce){var vio=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target; if(e.isIntersecting){v.preload='auto'; var p=v.play(); if(p&&p.catch)p.catch(function(){})} else v.pause()})},{threshold:.5}); strip.querySelectorAll('video').forEach(function(v){vio.observe(v)})}
 
   // David clip plays only while on screen
-  (function(){var v=document.getElementById('david'); if(reduce||!('IntersectionObserver' in window))return;
-    new IntersectionObserver(function(e){if(e[0].isIntersecting){var p=v.play(); if(p&&p.catch)p.catch(function(){})} else v.pause()},{threshold:.4}).observe(v)})();
-
   // floating button
   var fab=document.getElementById('fab');
   if('IntersectionObserver' in window){var heroV=true, footV=false; function fabSet(){fab.classList.toggle('show',!heroV&&!footV)}
