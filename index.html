@@ -227,7 +227,7 @@ section{border-top:1px solid var(--line)}
   <div class="wrap hero-in">
     <div class="lbl"><b>[000]</b> Poesía bordada · Roma Norte</div>
     <h1 id="heroLine">La gorra nos cubre de versos breves y acompaña al arte y a la naturaleza.</h1>
-    <div><a class="btn wa" data-msg="Hola Orlando, vi moebius OP y quiero una gorra." href="#" target="_blank" rel="noopener">Lo quiero →</a></div>
+    <div><a class="btn wa" data-msg="Hola Orlando, vi moebius OP y quiero una gorra." href="#" target="_blank" rel="noopener">La quiero →</a></div>
     <div class="ticks" aria-hidden="true"><span>001</span><span>002</span><span>003</span><span>005</span><span>008</span><span>013</span></div>
   </div>
 </header>
@@ -328,7 +328,7 @@ fueron el mismo amor.</p>
 <footer>
   <div class="wrap foot" style="border-top:1px solid var(--line)">
     <div class="flogo" role="img" aria-label="moebius OP"><span class="mkwrap fm" id="fmark"></span><div class="fword" id="fword">moebius OP</div></div>
-    <div><a class="btn wa" data-msg="Hola Orlando, quiero una gorra de moebius OP." href="#" target="_blank" rel="noopener">Lo quiero →</a></div>
+    <div><a class="btn wa" data-msg="Hola Orlando, quiero una gorra de moebius OP." href="#" target="_blank" rel="noopener">La quiero →</a></div>
     <div class="contact">
       <span>Tel. <span style="user-select:all">+52 55 6888 8698</span></span>
       <span>Tabasco 130, Roma Norte, CDMX</span>
@@ -349,14 +349,14 @@ fueron el mismo amor.</p>
   </div>
 </footer>
 
-<a class="fab wa" id="fab" data-msg="Hola Orlando, vi moebius OP y quiero una gorra." href="#" target="_blank" rel="noopener" aria-label="Lo quiero">LO QUIERO →</a>
+<a class="fab wa" id="fab" data-msg="Hola Orlando, vi moebius OP y quiero una gorra." href="#" target="_blank" rel="noopener" aria-label="La quiero">LA QUIERO →</a>
 <div class="toast" id="toast" hidden></div>
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto a pantalla completa">
   <div class="lb-top"><span id="lbCount">01 / 05</span><button class="ic" type="button" id="lbClose" aria-label="Cerrar">×</button></div>
   <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""><video id="lbVid" muted loop playsinline hidden></video></div>
   <div class="lb-cap" id="lbCap"></div>
-  <div class="lb-nav"><button class="ic" type="button" id="lbPrev" aria-label="Anterior">←</button><a class="btn wa" id="lbAsk" data-msg="Hola Orlando, quiero esta gorra." href="#" target="_blank" rel="noopener" style="min-height:46px">Lo quiero</a><button class="ic" type="button" id="lbNext" aria-label="Siguiente">→</button></div>
+  <div class="lb-nav"><button class="ic" type="button" id="lbPrev" aria-label="Anterior">←</button><a class="btn wa" id="lbAsk" data-msg="Hola Orlando, quiero esta gorra." href="#" target="_blank" rel="noopener" style="min-height:46px">La quiero</a><button class="ic" type="button" id="lbNext" aria-label="Siguiente">→</button></div>
 </div>
 
 <script>
@@ -420,7 +420,7 @@ fueron el mismo amor.</p>
       '<span class="idx">['+String(k+1).padStart(2,'0')+'] '+esc(c.ph.toUpperCase())+'</span>'+
       '<button class="full" type="button" aria-label="Ver a pantalla completa">⤢</button>'+
       '<div class="meta"><div class="nm">'+esc(c.name)+' · '+esc(c.id.charAt(0)+c.id.slice(1).toLowerCase())+'</div><div class="vs">«'+esc(c.lines.join(' '))+'»</div><div class="sp">'+c.sku+'</div>'+
-      '<a class="ask wa" data-msg="Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+'." href="#" target="_blank" rel="noopener"><span>Lo quiero</span><span>→</span></a></div>';
+      '<a class="ask wa" data-msg="Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+'." href="#" target="_blank" rel="noopener"><span>La quiero</span><span>→</span></a></div>';
     var vs=el.querySelector('.vs'), stage=el.querySelector('.stage'), verse='«'+c.lines.join(' ')+'»', typed=false;
     function typeVerse(){if(!typed){typed=true; typeInto(vs,verse,{speed:30,keepCaret:false})}}
     stage.addEventListener('mouseenter',typeVerse);
