@@ -70,6 +70,11 @@ section{border-top:1px solid var(--line)}
 .ticks{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;font-size:10.5px;letter-spacing:.16em;color:var(--dim)}
 
 /* poem */
+.lineup{background:radial-gradient(ellipse 80% 70% at 50% 46%,#F4F4F2 0%,#E6E6E3 70%,#D9D9D5 100%);color:#3A3A37;padding:20svh 6vw 9svh}
+.lu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9svh 7vw;max-width:780px;margin:0 auto;align-items:center}
+.lu-it{display:block;transition:transform .5s cubic-bezier(.32,.72,0,1)}.lu-it:hover{transform:translateY(-4px)}
+.lu-it img{display:block;width:100%;max-width:190px;height:auto;margin:0 auto;filter:drop-shadow(6px 10px 9px rgba(0,0,0,.22))}
+.lu-cap{display:flex;justify-content:space-between;max-width:780px;margin:16svh auto 0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#77776F}
 .pause{padding-block:42svh}
 /* colibrí */
 .colibri{padding-block:22svh 30svh;overflow:hidden}
@@ -234,6 +239,11 @@ ella le entrega su néctar.</p>
   <div class="float-cap"><span>[ ] La colección</span><span>5 colores</span></div>
 </section>
 
+
+<section class="lineup" aria-label="La colección">
+  <div class="lu-grid"><a class="lu-it" href="#gorras"><img src="img/lu_mostaza_cafe.webp" alt="Gorra mostaza «Un café» con el símbolo bordado" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_grafito_cafe.webp" alt="Gorra grafito «Un café» con el símbolo bordado" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_negro_cafe.webp" alt="Gorra negra «Un café y sus ojos fueron el mismo amor»" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_mostaza_ojos.webp" alt="Gorra mostaza «Miré con los ojos cerrados para encontrarte»" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_pizarra_tiempo.webp" alt="Gorra pizarra «El tiempo está herido»" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_gris_teimagino.webp" alt="Gorra gris «Te imagino, escribo, existes…»" loading="lazy" decoding="async"></a></div>
+  <div class="lu-cap"><span>[ ] Colección 01</span><span>6 gorras · $300 MXN</span></div>
+</section>
 
 <section id="gorras">
   <div class="wrap sec">
