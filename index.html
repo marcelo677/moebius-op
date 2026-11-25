@@ -226,7 +226,7 @@ section{border-top:1px solid var(--line)}
   <div class="wrap hero-in">
     <div class="lbl"><b>[000]</b> Poesía bordada · Roma Norte</div>
     <h1 id="heroLine">La gorra nos cubre de versos breves y acompaña al arte y a la naturaleza.</h1>
-    <div><a class="btn wa" data-msg="Hola Orlando, vi moebius OP y quiero una gorra." href="#" target="_blank" rel="noopener">La quiero →</a></div>
+    <div><a class="btn" href="#gorras">La quiero →</a></div>
     <div class="ticks" aria-hidden="true"><span>001</span><span>002</span><span>003</span><span>005</span><span>008</span><span>013</span></div>
   </div>
 </header>
@@ -341,7 +341,7 @@ fueron el mismo amor.</p>
 <footer>
   <div class="wrap foot" style="border-top:1px solid var(--line)">
     <div class="flogo" role="img" aria-label="moebius OP"><span class="mkwrap fm" id="fmark"></span><div class="fword" id="fword">moebius OP</div></div>
-    <div><a class="btn wa" data-msg="Hola Orlando, quiero una gorra de moebius OP." href="#" target="_blank" rel="noopener">La quiero →</a></div>
+    <div><a class="btn" href="#gorras">La quiero →</a></div>
     <div class="contact">
       <span>Tel. <span style="user-select:all">+52 55 6888 8698</span></span>
       <span>Tabasco 130, Roma Norte, CDMX</span>
@@ -362,7 +362,7 @@ fueron el mismo amor.</p>
   </div>
 </footer>
 
-<a class="fab wa" id="fab" data-msg="Hola Orlando, vi moebius OP y quiero una gorra." href="#" target="_blank" rel="noopener" aria-label="La quiero">LA QUIERO →</a>
+<a class="fab" id="fab" href="#gorras" aria-label="La quiero">LA QUIERO →</a>
 <div class="toast" id="toast" hidden></div>
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto a pantalla completa">
@@ -376,7 +376,12 @@ fueron el mismo amor.</p>
 (function(){
   var PHONE='525568888698';
   function wa(msg){return 'https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg)}
-  function bindWa(root){(root||document).querySelectorAll('.wa').forEach(function(a){a.href=wa(a.getAttribute('data-msg')||'Hola Orlando')})}
+  // Shopify checkout: cada gorra y color va directo al carrito con esa variante
+  var SHOP='https://upfrg1-tt.myshopify.com/cart/';
+  var PROD=[{k:'café',v:{mostaza:'68057169068168',grafito:'68057169100936',negro:'68057169133704'}},{k:'ojos cerrados',v:{mostaza:'68057169166472',rosa:'68057169199240'}},{k:'tiempo',v:{pizarra:'68057169363080'}},{k:'imagino',v:{gris:'68057169395848'}}];
+  function buy(msg){var m=(msg||'').toLowerCase(); for(var i=0;i<PROD.length;i++){var p=PROD[i]; if(m.indexOf(p.k)<0)continue; var ks=Object.keys(p.v); for(var j=0;j<ks.length;j++){if(m.indexOf(ks[j])>-1)return SHOP+p.v[ks[j]]+':1'} return SHOP+p.v[ks[0]]+':1'} return null}
+  function link(msg){return buy(msg)||wa(msg)}
+  function bindWa(root){(root||document).querySelectorAll('.wa').forEach(function(a){a.href=link(a.getAttribute('data-msg')||'Hola Orlando')})}
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var canHover=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
 
@@ -523,7 +528,7 @@ fueron el mismo amor.</p>
   function capItem(c){return {src:c.photo,alt:'Foto real de la gorra '+c.name,tag:c.ph,text:c.name+' · '+c.id.toLowerCase()+' · «'+c.lines.join(' ')+'» · $300 MXN',msg:'Hola Orlando, quiero la gorra «'+c.name+'» en color '+c.id.toLowerCase()+' ($300 MXN).'}}
   function show(i){idx=(i+LIST.length)%LIST.length; var it=LIST[idx];
     if(it.video){img.hidden=true; vid.hidden=false; vid.poster=it.src; vid.src=it.video; var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){})} else {vid.pause(); vid.removeAttribute('src'); vid.hidden=true; img.hidden=false; img.src=it.src; img.alt=it.alt}
-    lc.textContent=String(idx+1).padStart(2,'0')+' / '+String(LIST.length).padStart(2,'0')+' · '+it.tag.toUpperCase(); ask.href=wa(it.msg); typeInto(cap,it.text,{speed:22,keepCaret:false})}
+    lc.textContent=String(idx+1).padStart(2,'0')+' / '+String(LIST.length).padStart(2,'0')+' · '+it.tag.toUpperCase(); ask.href=link(it.msg); typeInto(cap,it.text,{speed:22,keepCaret:false})}
   function openList(list,i){LIST=list; last=document.activeElement; show(i); lb.hidden=false; document.body.style.overflow='hidden'; document.getElementById('lbClose').focus(); if(lb.requestFullscreen)lb.requestFullscreen().catch(function(){})}
   function openLb(i){openList(CAPS.map(capItem),i)}
   function closeLb(){vid.pause(); lb.hidden=true; document.body.style.overflow=''; if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){}); if(last)last.focus()}
