@@ -70,11 +70,6 @@ section{border-top:1px solid var(--line)}
 .ticks{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;font-size:10.5px;letter-spacing:.16em;color:var(--dim)}
 
 /* poem */
-.lineup{background:radial-gradient(ellipse 80% 70% at 50% 46%,#F4F4F2 0%,#E6E6E3 70%,#D9D9D5 100%);color:#3A3A37;padding:20svh 6vw 9svh}
-.lu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9svh 7vw;max-width:780px;margin:0 auto;align-items:center}
-.lu-it{display:block;transition:transform .5s cubic-bezier(.32,.72,0,1)}.lu-it:hover{transform:translateY(-4px)}
-.lu-it img{display:block;width:100%;max-width:190px;height:auto;margin:0 auto;filter:drop-shadow(6px 10px 9px rgba(0,0,0,.22))}
-.lu-cap{display:flex;justify-content:space-between;max-width:780px;margin:16svh auto 0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#77776F}
 .pause{padding-block:42svh}
 /* colibrí */
 .colibri{padding-block:22svh 30svh;overflow:hidden}
@@ -130,6 +125,9 @@ section{border-top:1px solid var(--line)}
 .shot img,.shot video{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--panel)}
 .shot .t{position:absolute;left:8px;top:7px;font-size:10px;letter-spacing:.16em;color:var(--bone);text-shadow:0 0 6px rgba(0,0,0,.6)}
 .shot .c{display:block;padding:9px 2px 0;font-size:11px;letter-spacing:.06em;color:var(--dim);background:var(--bg)}
+.strip.tall .shot{flex:0 0 auto;width:min(88vw,calc(88svh * .8));max-width:none;cursor:zoom-in}
+.strip.tall .shot img{height:76svh;width:100%;aspect-ratio:auto;object-fit:cover;object-position:50% 35%}
+@media (min-width:760px){.strip.tall .shot img{height:88svh}}
 @media (min-width:760px){.shot{flex-basis:32%}.strip{padding-left:calc((100vw - 684px)/2);scroll-padding-left:calc((100vw - 684px)/2)}}
 
 /* typed poem */
@@ -240,11 +238,6 @@ ella le entrega su néctar.</p>
 </section>
 
 
-<section class="lineup" aria-label="La colección">
-  <div class="lu-grid"><a class="lu-it" href="#gorras"><img src="img/lu_mostaza_cafe.webp" alt="Gorra mostaza «Un café» con el símbolo bordado" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_grafito_cafe.webp" alt="Gorra grafito «Un café» con el símbolo bordado" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_negro_cafe.webp" alt="Gorra negra «Un café y sus ojos fueron el mismo amor»" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_mostaza_ojos.webp" alt="Gorra mostaza «Miré con los ojos cerrados para encontrarte»" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_pizarra_tiempo.webp" alt="Gorra pizarra «El tiempo está herido»" loading="lazy" decoding="async"></a><a class="lu-it" href="#gorras"><img src="img/lu_gris_teimagino.webp" alt="Gorra gris «Te imagino, escribo, existes…»" loading="lazy" decoding="async"></a></div>
-  <div class="lu-cap"><span>[ ] Colección 01</span><span>6 gorras · $300 MXN</span></div>
-</section>
-
 <section id="gorras">
   <div class="wrap sec">
     <div class="sec-head"><span class="lbl"><b>[001]</b> Gorras</span><span class="lbl" id="capHint">Toca: el dibujo</span></div>
@@ -265,8 +258,8 @@ ella le entrega su néctar.</p>
   <div class="wrap sec" style="padding-bottom:24px">
     <div class="sec-head" style="margin-bottom:22px"><span class="lbl"><b>[002·b]</b> Candid</span><span class="lbl">Roma · 24–25.11.26</span></div>
   </div>
-  <div class="strip" id="strip2"></div>
-  <div class="wrap" style="padding-block:14px 72px"><div class="legend" style="margin:0"><span id="stripCount2">01 / 06</span><span>Desliza →</span></div></div>
+  <div class="strip tall" id="strip2"></div>
+  <div class="wrap" style="padding-block:14px 72px"><div class="legend" style="margin:0"><span id="stripCount2">01 / 05</span><span>Desliza →</span></div></div>
 </section>
 
 <section id="poema">
@@ -465,18 +458,17 @@ fueron el mismo amor.</p>
 
   // candid strip
   var SHOTS2=[
-    {src:'img/candid_c1.jpg',t:'24.11',c:'Rosa · leyendo en la esquina',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en rosa.'},
-    {src:'img/candid_c2.jpg',t:'24.11',c:'Negro · Moebius OP al costado',msg:'Hola Orlando, quiero la gorra «Un café» en negro.'},
-    {src:'img/candid_c3.jpg',t:'24.11',c:'Mostaza · desde arriba, en el café',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
-    {src:'img/candid_c4.jpg',t:'25.11',c:'Mostaza · el poeta de perfil',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
-    {src:'img/candid_c5.jpg',t:'25.11',c:'Mostaza · ajustando la visera',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
-    {src:'img/candid_c6.jpg',t:'25.11',c:'Negro · un café, el mismo amor',msg:'Hola Orlando, quiero la gorra «Un café» en negro.'}
+    {src:'img/candid_c4.jpg',c:'El poeta de perfil, gorra mostaza',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
+    {src:'img/candid_c1.jpg',c:'Gorra rosa, leyendo en la esquina',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en rosa.'},
+    {src:'img/candid_c5.jpg',c:'Ajustando la visera, gorra mostaza',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
+    {src:'img/candid_c3.jpg',c:'Gorra mostaza vista desde arriba',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
+    {src:'img/candid_c6.jpg',c:'Gorra negra «Un café», con su taza',msg:'Hola Orlando, quiero la gorra «Un café» en negro.'}
   ];
   var strip2=document.getElementById('strip2'), sc2=document.getElementById('stripCount2');
   var SHOT2_ITEMS=SHOTS2.map(function(x){return {src:x.src,alt:x.c,tag:'Candid · CDMX',text:x.c,msg:x.msg}});
   SHOTS2.forEach(function(x,i){
     var b=document.createElement('button'); b.type='button'; b.className='shot'; b.setAttribute('aria-label','Ver a pantalla completa: '+x.c);
-    b.innerHTML='<img src="'+x.src+'" alt="'+esc(x.c)+'" decoding="async" loading="lazy"><span class="t">['+String(i+1).padStart(2,'0')+'] '+x.t+'</span><span class="c">'+esc(x.c)+'</span>';
+    b.innerHTML='<img src="'+x.src+'" alt="'+esc(x.c)+'" decoding="async" loading="lazy">';
     b.addEventListener('click',function(){openList(SHOT2_ITEMS,i)});
     strip2.appendChild(b);
   });
