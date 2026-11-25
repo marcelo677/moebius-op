@@ -125,6 +125,17 @@ section{border-top:1px solid var(--line)}
 .shot img,.shot video{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--panel)}
 .shot .t{position:absolute;left:8px;top:7px;font-size:10px;letter-spacing:.16em;color:var(--bone);text-shadow:0 0 6px rgba(0,0,0,.6)}
 .shot .c{display:block;padding:9px 2px 0;font-size:11px;letter-spacing:.06em;color:var(--dim);background:var(--bg)}
+.hs-ui{display:flex;align-items:center;gap:18px;padding:14px max(18px,env(safe-area-inset-left,0px)) 72px;font-size:11px;letter-spacing:.14em;color:var(--dim)}
+.hs-bar{flex:1;height:1px;background:rgba(236,230,218,.14);position:relative;overflow:hidden}.hs-bar i{position:absolute;inset:0;background:var(--bone);transform-origin:0 50%;transform:scaleX(.2)}
+@media (min-width:900px) and (hover:hover) and (pointer:fine){
+ .hs.on{position:relative}
+ .hs.on .hs-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+ .hs.on .strip{overflow:visible;scroll-snap-type:none;gap:2.2vw;padding-left:var(--hsPad);padding-right:var(--hsPad);will-change:transform;width:max-content}
+ .hs.on .strip.tall .shot{width:calc(80svh * .8)}
+ .hs.on .strip.tall .shot img{height:80svh;transition:filter .6s ease,transform .9s cubic-bezier(.22,1,.36,1);filter:brightness(.55) saturate(.8);transform:scale(.96)}
+ .hs.on .strip.tall .shot.act img{filter:none;transform:none}
+ .hs.on .hs-ui{position:absolute;left:var(--hsPad);right:var(--hsPad);bottom:3.5svh;padding:0}
+}
 .strip.tall .shot{flex:0 0 auto;width:min(88vw,calc(88svh * .8));max-width:none;cursor:zoom-in}
 .strip.tall .shot img{height:76svh;width:100%;aspect-ratio:auto;object-fit:cover;object-position:50% 35%}
 @media (min-width:760px){.strip.tall .shot img{height:88svh}}
@@ -258,8 +269,10 @@ ella le entrega su néctar.</p>
   <div class="wrap sec" style="padding-bottom:24px">
     <div class="sec-head" style="margin-bottom:22px"><span class="lbl"><b>[002·b]</b> Candid</span><span class="lbl">Roma · 24–25.11.26</span></div>
   </div>
-  <div class="strip tall" id="strip2"></div>
-  <div class="wrap" style="padding-block:14px 72px"><div class="legend" style="margin:0"><span id="stripCount2">01 / 05</span><span>Desliza →</span></div></div>
+  <div class="hs" id="hs"><div class="hs-pin">
+    <div class="strip tall" id="strip2"></div>
+    <div class="hs-ui"><span id="stripCount2">01 / 05</span><span class="hs-bar"><i id="hsBar"></i></span><span class="hs-hint" id="hsHint">Desliza →</span></div>
+  </div></div>
 </section>
 
 <section id="poema">
@@ -472,7 +485,30 @@ fueron el mismo amor.</p>
     b.addEventListener('click',function(){openList(SHOT2_ITEMS,i)});
     strip2.appendChild(b);
   });
-  strip2.addEventListener('scroll',function(){var w=strip2.children[0].getBoundingClientRect().width+8; sc2.textContent=String(Math.min(SHOTS2.length,Math.round(strip2.scrollLeft/w)+1)).padStart(2,'0')+' / '+String(SHOTS2.length).padStart(2,'0')},{passive:true});
+
+  // candid: on desktop, vertical scroll drives a pinned horizontal film strip
+  (function(){var hs=document.getElementById('hs'), bar=document.getElementById('hsBar'), n=SHOTS2.length, mq=matchMedia('(min-width:900px) and (hover:hover) and (pointer:fine)'), dist=0, raf=0, last=-1;
+    var shots=strip2.children; function act(i){if(i===last)return; last=i; for(var k=0;k<shots.length;k++)shots[k].classList.toggle('act',k===i); sc2.textContent=String(i+1).padStart(2,'0')+' / '+String(n).padStart(2,'0')}
+    function layout(){
+      if(!mq.matches||reduce){hs.classList.remove('on'); document.getElementById('hsHint').textContent='Desliza →'; hs.style.height=''; strip2.style.transform=''; for(var k=0;k<shots.length;k++)shots[k].classList.remove('act'); return}
+      hs.classList.add('on'); document.getElementById('hsHint').textContent='Scroll ↓';
+      var w=shots[0].getBoundingClientRect().width, pad=Math.max((innerWidth-w)/2,24);
+      hs.style.setProperty('--hsPad',pad+'px'); strip2.style.transform='none';
+      var cw=document.documentElement.clientWidth, r0=shots[0].getBoundingClientRect(), off=cw/2-(r0.left+r0.width/2); if(Math.abs(off)>1){pad+=off; hs.style.setProperty('--hsPad',pad+'px')}
+      var rl=shots[shots.length-1].getBoundingClientRect(); dist=Math.max(0,(rl.left+rl.width/2)-(document.documentElement.clientWidth/2));
+      hs.style.height=(dist+innerHeight)+'px'; tick();
+    }
+    function tick(){raf=0; if(!hs.classList.contains('on'))return;
+      var r=hs.getBoundingClientRect(), span=hs.offsetHeight-innerHeight, p=span>0?Math.min(1,Math.max(0,-r.top/span)):0;
+      strip2.style.transform='translate3d('+(-p*dist).toFixed(1)+'px,0,0)';
+      bar.style.transform='scaleX('+Math.max(.04,p).toFixed(3)+')'; act(Math.round(p*(n-1)));
+    }
+    addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(tick)},{passive:true});
+    addEventListener('resize',layout); if(mq.addEventListener)mq.addEventListener('change',layout);
+    if(document.readyState==='complete')layout(); else addEventListener('load',layout); layout();
+    strip2.addEventListener('scroll',function(){if(hs.classList.contains('on'))return; var w=shots[0].getBoundingClientRect().width+8, i=Math.min(n-1,Math.round(strip2.scrollLeft/w)); bar.style.transform='scaleX('+((i+1)/n).toFixed(3)+')'; act(i)},{passive:true});
+    act(0); bar.style.transform='scaleX('+(1/n).toFixed(3)+')';
+  })();
 
   // David clip plays only while on screen
   // floating button
