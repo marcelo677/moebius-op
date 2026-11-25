@@ -261,6 +261,14 @@ ella le entrega su néctar.</p>
   <div class="wrap" style="padding-block:14px 72px"><div class="legend" style="margin:0"><span id="stripCount">01 / 09</span><span>Desliza →</span></div></div>
 </section>
 
+<section id="candid">
+  <div class="wrap sec" style="padding-bottom:24px">
+    <div class="sec-head" style="margin-bottom:22px"><span class="lbl"><b>[002·b]</b> Candid</span><span class="lbl">Roma · 24–25.11.26</span></div>
+  </div>
+  <div class="strip" id="strip2"></div>
+  <div class="wrap" style="padding-block:14px 72px"><div class="legend" style="margin:0"><span id="stripCount2">01 / 06</span><span>Desliza →</span></div></div>
+</section>
+
 <section id="poema">
   <div class="wrap sec">
     <div class="sec-head"><span class="lbl"><b>[003]</b> Poema</span></div>
@@ -454,6 +462,25 @@ fueron el mismo amor.</p>
   sc.textContent='01 / '+String(SHOTS.length).padStart(2,'0');
   strip.addEventListener('scroll',function(){var w=strip.children[0].getBoundingClientRect().width+8; sc.textContent=String(Math.min(SHOTS.length,Math.round(strip.scrollLeft/w)+1)).padStart(2,'0')+' / '+String(SHOTS.length).padStart(2,'0')},{passive:true});
   if('IntersectionObserver' in window&&!reduce){var vio=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target; if(e.isIntersecting){v.preload='auto'; var p=v.play(); if(p&&p.catch)p.catch(function(){})} else v.pause()})},{threshold:.5}); strip.querySelectorAll('video').forEach(function(v){vio.observe(v)})}
+
+  // candid strip
+  var SHOTS2=[
+    {src:'img/candid_c1.jpg',t:'24.11',c:'Rosa · leyendo en la esquina',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en rosa.'},
+    {src:'img/candid_c2.jpg',t:'24.11',c:'Negro · Moebius OP al costado',msg:'Hola Orlando, quiero la gorra «Un café» en negro.'},
+    {src:'img/candid_c3.jpg',t:'24.11',c:'Mostaza · desde arriba, en el café',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
+    {src:'img/candid_c4.jpg',t:'25.11',c:'Mostaza · el poeta de perfil',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
+    {src:'img/candid_c5.jpg',t:'25.11',c:'Mostaza · ajustando la visera',msg:'Hola Orlando, quiero la gorra «Ojos cerrados» en mostaza.'},
+    {src:'img/candid_c6.jpg',t:'25.11',c:'Negro · un café, el mismo amor',msg:'Hola Orlando, quiero la gorra «Un café» en negro.'}
+  ];
+  var strip2=document.getElementById('strip2'), sc2=document.getElementById('stripCount2');
+  var SHOT2_ITEMS=SHOTS2.map(function(x){return {src:x.src,alt:x.c,tag:'Candid · CDMX',text:x.c,msg:x.msg}});
+  SHOTS2.forEach(function(x,i){
+    var b=document.createElement('button'); b.type='button'; b.className='shot'; b.setAttribute('aria-label','Ver a pantalla completa: '+x.c);
+    b.innerHTML='<img src="'+x.src+'" alt="'+esc(x.c)+'" decoding="async" loading="lazy"><span class="t">['+String(i+1).padStart(2,'0')+'] '+x.t+'</span><span class="c">'+esc(x.c)+'</span>';
+    b.addEventListener('click',function(){openList(SHOT2_ITEMS,i)});
+    strip2.appendChild(b);
+  });
+  strip2.addEventListener('scroll',function(){var w=strip2.children[0].getBoundingClientRect().width+8; sc2.textContent=String(Math.min(SHOTS2.length,Math.round(strip2.scrollLeft/w)+1)).padStart(2,'0')+' / '+String(SHOTS2.length).padStart(2,'0')},{passive:true});
 
   // David clip plays only while on screen
   // floating button
